@@ -25,7 +25,6 @@ Here's the current lowlevel API status.
 - [ ] Standard sound manipulation functions
 - [ ] Synchronization point APIs
 - [ ] Loop Count/Points
-- [ ] Loop Count/Points
 - [ ] Funcs for MOD/S3M/XM/IT/MID sequenced formats
 - [ ] Userdata set/get
 
