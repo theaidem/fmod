@@ -43,7 +43,7 @@ func (r *Reverb3D) SetProperties(properties ReverbProperties) error {
 	return errs[res]
 }
 
-func (r *Reverb3D) GetProperties() (ReverbProperties, error) {
+func (r *Reverb3D) Properties() (ReverbProperties, error) {
 	var cproperties C.FMOD_REVERB_PROPERTIES
 	properties := NewReverbProperties()
 	res := C.FMOD_Reverb3D_GetProperties(r.cptr, &cproperties)
@@ -56,7 +56,7 @@ func (r *Reverb3D) SetActive(active bool) error {
 	return errs[res]
 }
 
-func (r *Reverb3D) GetActive() (bool, error) {
+func (r *Reverb3D) IsActive() (bool, error) {
 	var active C.FMOD_BOOL
 	res := C.FMOD_Reverb3D_GetActive(r.cptr, &active)
 	return setBool(active), errs[res]
@@ -71,7 +71,7 @@ func (r *Reverb3D) SetUserData(userdata *interface{}) error {
 	return ErrNoImpl
 }
 
-func (r *Reverb3D) GetUserData(userdata **interface{}) error {
+func (r *Reverb3D) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_Reverb3D_GetUserData             (FMOD_REVERB3D *reverb3d, void **userdata);
 	return ErrNoImpl
 }

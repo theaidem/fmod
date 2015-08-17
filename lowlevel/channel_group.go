@@ -13,7 +13,7 @@ type ChannelGroup struct {
    'ChannelGroup' API
 */
 
-func (c *ChannelGroup) GetSystemObject() (*System, error) {
+func (c *ChannelGroup) SystemObject() (*System, error) {
 	var system System
 	res := C.FMOD_ChannelGroup_GetSystemObject(c.cptr, &system.cptr)
 	return &system, errs[res]
@@ -33,7 +33,7 @@ func (c *ChannelGroup) SetPaused(paused bool) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetPaused() (bool, error) {
+func (c *ChannelGroup) IsPaused() (bool, error) {
 	var paused C.FMOD_BOOL
 	res := C.FMOD_ChannelGroup_GetPaused(c.cptr, &paused)
 	return setBool(paused), errs[res]
@@ -44,7 +44,7 @@ func (c *ChannelGroup) SetVolume(volume float64) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetVolume() (float64, error) {
+func (c *ChannelGroup) Volume() (float64, error) {
 	var volume C.float
 	res := C.FMOD_ChannelGroup_GetVolume(c.cptr, &volume)
 	return float64(volume), errs[res]
@@ -55,13 +55,13 @@ func (c *ChannelGroup) SetVolumeRamp(ramp bool) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetVolumeRamp() (bool, error) {
+func (c *ChannelGroup) VolumeRamp() (bool, error) {
 	var ramp C.FMOD_BOOL
 	res := C.FMOD_ChannelGroup_GetVolumeRamp(c.cptr, &ramp)
 	return setBool(ramp), errs[res]
 }
 
-func (c *ChannelGroup) GetAudibility() (float64, error) {
+func (c *ChannelGroup) Audibility() (float64, error) {
 	var audibility C.float
 	res := C.FMOD_ChannelGroup_GetAudibility(c.cptr, &audibility)
 	return float64(audibility), errs[res]
@@ -72,7 +72,7 @@ func (c *ChannelGroup) SetPitch(pitch float64) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetPitch() (float64, error) {
+func (c *ChannelGroup) Pitch() (float64, error) {
 	var pitch C.float
 	res := C.FMOD_ChannelGroup_GetPitch(c.cptr, &pitch)
 	return float64(pitch), errs[res]
@@ -83,7 +83,7 @@ func (c *ChannelGroup) SetMute(mute bool) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetMute() (bool, error) {
+func (c *ChannelGroup) Mute() (bool, error) {
 	var mute C.FMOD_BOOL
 	res := C.FMOD_ChannelGroup_GetMute(c.cptr, &mute)
 	return setBool(mute), errs[res]
@@ -94,7 +94,7 @@ func (c *ChannelGroup) SetReverbProperties(instance int, wet float64) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetReverbProperties(instance int) (float64, error) {
+func (c *ChannelGroup) ReverbProperties(instance int) (float64, error) {
 	var wet C.float
 	res := C.FMOD_ChannelGroup_GetReverbProperties(c.cptr, C.int(instance), &wet)
 	return float64(wet), errs[res]
@@ -105,7 +105,7 @@ func (c *ChannelGroup) SetLowPassGain(gain float64) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetLowPassGain() (float64, error) {
+func (c *ChannelGroup) LowPassGain() (float64, error) {
 	var gain C.float
 	res := C.FMOD_ChannelGroup_GetLowPassGain(c.cptr, &gain)
 	return float64(gain), errs[res]
@@ -116,7 +116,7 @@ func (c *ChannelGroup) SetMode(mode Mode) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetMode() (Mode, error) {
+func (c *ChannelGroup) Mode() (Mode, error) {
 	var mode C.FMOD_MODE
 	res := C.FMOD_ChannelGroup_GetMode(c.cptr, &mode)
 	return Mode(mode), errs[res]
@@ -157,7 +157,7 @@ func (c *ChannelGroup) SetMixMatrix(matrix *C.float, outchannels, inchannels, in
 	return ErrNoImpl
 }
 
-func (c *ChannelGroup) GetMixMatrix(matrix *C.float, outchannels, inchannels *C.int, inchannel_hop C.int) error {
+func (c *ChannelGroup) MixMatrix(matrix *C.float, outchannels, inchannels *C.int, inchannel_hop C.int) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetMixMatrix        (FMOD_CHANNELGROUP *channelgroup, float *matrix, int *outchannels, int *inchannels, int inchannel_hop);
 	return ErrNoImpl
 }
@@ -166,7 +166,7 @@ func (c *ChannelGroup) GetMixMatrix(matrix *C.float, outchannels, inchannels *C.
    Clock based functionality.
 */
 
-func (c *ChannelGroup) GetDSPClock() (uint64, uint64, error) {
+func (c *ChannelGroup) DSPClock() (uint64, uint64, error) {
 	var dspclock, parentclock C.ulonglong
 	res := C.FMOD_ChannelGroup_GetDSPClock(c.cptr, &dspclock, &parentclock)
 	return uint64(dspclock), uint64(parentclock), errs[res]
@@ -177,7 +177,7 @@ func (c *ChannelGroup) SetDelay(dspclock_start, dspclock_end uint64, stopchannel
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetDelay() (uint64, uint64, bool, error) {
+func (c *ChannelGroup) Delay() (uint64, uint64, bool, error) {
 	var dspclock_start, dspclock_end C.ulonglong
 	var stopchannels C.FMOD_BOOL
 	res := C.FMOD_ChannelGroup_GetDelay(c.cptr, &dspclock_start, &dspclock_end, &stopchannels)
@@ -199,7 +199,7 @@ func (c *ChannelGroup) RemoveFadePoints(dspclock_start, dspclock_end uint64) err
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetFadePoints() (uint32, uint64, float64, error) {
+func (c *ChannelGroup) FadePoints() (uint32, uint64, float64, error) {
 	var numpoints C.uint
 	var point_dspclock C.ulonglong
 	var point_volume C.float
@@ -211,7 +211,7 @@ func (c *ChannelGroup) GetFadePoints() (uint32, uint64, float64, error) {
    DSP effects.
 */
 
-func (c *ChannelGroup) GetDSP(index int) (DSP, error) {
+func (c *ChannelGroup) DSP(index int) (DSP, error) {
 	var dsp DSP
 	res := C.FMOD_ChannelGroup_GetDSP(c.cptr, C.int(index), &dsp.cptr)
 	return dsp, errs[res]
@@ -227,7 +227,7 @@ func (c *ChannelGroup) RemoveDSP(dsp DSP) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetNumDSPs() (int, error) {
+func (c *ChannelGroup) NumDSPs() (int, error) {
 	var numdsps C.int
 	res := C.FMOD_ChannelGroup_GetNumDSPs(c.cptr, &numdsps)
 	return int(numdsps), errs[res]
@@ -238,7 +238,7 @@ func (c *ChannelGroup) SetDSPIndex(dsp DSP, index int) error {
 	return errs[res]
 }
 
-func (c *ChannelGroup) GetDSPIndex(dsp DSP) (int, error) {
+func (c *ChannelGroup) DSPIndex(dsp DSP) (int, error) {
 	var index C.int
 	res := C.FMOD_ChannelGroup_GetDSPIndex(c.cptr, dsp.cptr, &index)
 	return int(index), errs[res]
@@ -387,7 +387,7 @@ func (c *ChannelGroup) SetUserData(userdata *interface{}) error {
 	return ErrNoImpl
 }
 
-func (c *ChannelGroup) GetUserData(userdata **interface{}) error {
+func (c *ChannelGroup) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetUserData(FMOD_CHANNELGROUP *channelgroup, void **userdata);
 	return ErrNoImpl
 }
@@ -408,21 +408,21 @@ func (c *ChannelGroup) AddGroup(group ChannelGroup, propagatedspclock bool) (Dsp
 	return connection, errs[res]
 }
 
-func (c *ChannelGroup) GetNumGroups() (int, error) {
+func (c *ChannelGroup) NumGroups() (int, error) {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetNumGroups(FMOD_CHANNELGROUP *channelgroup, int *numgroups);
 	var numgroups C.int
 	res := C.FMOD_ChannelGroup_GetNumGroups(c.cptr, &numgroups)
 	return int(numgroups), errs[res]
 }
 
-func (c *ChannelGroup) GetGroup(index int) (ChannelGroup, error) {
+func (c *ChannelGroup) Group(index int) (ChannelGroup, error) {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetGroup(FMOD_CHANNELGROUP *channelgroup, int index, FMOD_CHANNELGROUP **group);
 	var group ChannelGroup
 	res := C.FMOD_ChannelGroup_GetGroup(c.cptr, C.int(index), &group.cptr)
 	return group, errs[res]
 }
 
-func (c *ChannelGroup) GetParentGroup() (ChannelGroup, error) {
+func (c *ChannelGroup) ParentGroup() (ChannelGroup, error) {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetParentGroup(FMOD_CHANNELGROUP *channelgroup, FMOD_CHANNELGROUP **group);
 	var group ChannelGroup
 	res := C.FMOD_ChannelGroup_GetParentGroup(c.cptr, &group.cptr)
@@ -433,20 +433,20 @@ func (c *ChannelGroup) GetParentGroup() (ChannelGroup, error) {
    Information only functions.
 */
 
-func (c *ChannelGroup) GetName(name *C.char, namelen C.int) error {
+func (c *ChannelGroup) Name(name *C.char, namelen C.int) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetName(FMOD_CHANNELGROUP *channelgroup, char *name, int namelen);
 	return ErrNoImpl
 
 }
 
-func (c *ChannelGroup) GetNumChannels() (int, error) {
+func (c *ChannelGroup) NumChannels() (int, error) {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetNumChannels(FMOD_CHANNELGROUP *channelgroup, int *numchannels);
 	var numchannels C.int
 	res := C.FMOD_ChannelGroup_GetNumChannels(c.cptr, &numchannels)
 	return int(numchannels), errs[res]
 }
 
-func (c *ChannelGroup) GetChannel(index int) (Channel, error) {
+func (c *ChannelGroup) Channel(index int) (Channel, error) {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetChannel(FMOD_CHANNELGROUP *channelgroup, int index, FMOD_CHANNEL **channel);
 	var channel Channel
 	res := C.FMOD_ChannelGroup_GetChannel(c.cptr, C.int(index), &channel.cptr)

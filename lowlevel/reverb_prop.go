@@ -7,40 +7,40 @@ import "C"
 
 type ReverbProperties struct {
 
-	/* [r/w] 0.0    20000.0 1500.0  Reverberation decay time in ms*/
+	// [r/w] 0.0    20000.0 1500.0  Reverberation decay time in ms
 	DecayTime float64
 
-	/* [r/w] 0.0    300.0   7.0     Initial reflection delay time*/
+	// [r/w] 0.0    300.0   7.0     Initial reflection delay time
 	EarlyDelay float64
 
-	/* [r/w] 0.0    100     11.0    Late reverberation delay time relative to initial reflection*/
+	// [r/w] 0.0    100     11.0    Late reverberation delay time relative to initial reflection
 	LateDelay float64
 
-	/* [r/w] 20.0   20000.0 5000    Reference high frequency (hz)*/
+	// [r/w] 20.0   20000.0 5000    Reference high frequency (hz)
 	HFReference float64
 
-	/* [r/w] 10.0   100.0   50.0    High-frequency to mid-frequency decay time ratio*/
+	// [r/w] 10.0   100.0   50.0    High-frequency to mid-frequency decay time ratio
 	HFDecayRatio float64
 
-	/* [r/w] 0.0    100.0   100.0   Value that controls the echo density in the late reverberation decay. */
+	// [r/w] 0.0    100.0   100.0   Value that controls the echo density in the late reverberation decay.
 	Diffusion float64
 
-	/* [r/w] 0.0    100.0   100.0   Value that controls the modal density in the late reverberation decay */
+	// [r/w] 0.0    100.0   100.0   Value that controls the modal density in the late reverberation decay
 	Density float64
 
-	/* [r/w] 20.0   1000.0  250.0   Reference low frequency (hz)*/
+	// [r/w] 20.0   1000.0  250.0   Reference low frequency (hz)
 	LowShelfFrequency float64
 
-	/* [r/w] -36.0  12.0    0.0     Relative room effect level at low frequencies*/
+	// [r/w] -36.0  12.0    0.0     Relative room effect level at low frequencies
 	LowShelfGain float64
 
-	/* [r/w] 20.0   20000.0 20000.0 Relative room effect level at high frequencies*/
+	// [r/w] 20.0   20000.0 20000.0 Relative room effect level at high frequencies
 	HighCut float64
 
-	/* [r/w] 0.0    100.0   50.0    Early reflections level relative to room effect*/
+	// [r/w] 0.0    100.0   50.0    Early reflections level relative to room effect
 	EarlyLateMix float64
 
-	/* [r/w] -80.0  20.0    -6.0    Room effect level (at mid frequencies)*/
+	// [r/w] -80.0  20.0    -6.0    Room effect level (at mid frequencies)
 	WetLevel float64
 }
 

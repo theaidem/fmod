@@ -18,7 +18,7 @@ func (s *Sound) Release() error {
 	return errs[res]
 }
 
-func (s *Sound) GetSystemObject() (*System, error) {
+func (s *Sound) SystemObject() (*System, error) {
 	var system System
 	res := C.FMOD_Sound_GetSystemObject(s.cptr, &system.cptr)
 	return &system, errs[res]
@@ -43,7 +43,7 @@ func (s *Sound) SetDefaults(frequency float64, priority int) error {
 	return errs[res]
 }
 
-func (s *Sound) GetDefaults() (float64, int, error) {
+func (s *Sound) Defaults() (float64, int, error) {
 	var frequency C.float
 	var priority C.int
 	res := C.FMOD_Sound_GetDefaults(s.cptr, &frequency, &priority)
@@ -92,30 +92,30 @@ func (s *Sound) SetSubSound(index int, subsound *Sound) error {
 	return errs[res]
 }
 
-func (s *Sound) GetSubSound(index int) (*Sound, error) {
+func (s *Sound) SubSound(index int) (*Sound, error) {
 	var sound Sound
 	res := C.FMOD_Sound_GetSubSound(s.cptr, C.int(index), &sound.cptr)
 	return &sound, errs[res]
 }
 
-func (s *Sound) GetSubSoundParent() (*Sound, error) {
+func (s *Sound) SubSoundParent() (*Sound, error) {
 	var parentsound Sound
 	res := C.FMOD_Sound_GetSubSoundParent(s.cptr, &parentsound.cptr)
 	return &parentsound, errs[res]
 }
 
-func (s *Sound) GetName(name *C.char, namelen C.int) error {
+func (s *Sound) Name(name *C.char, namelen C.int) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetName(FMOD_SOUND *sound, char *name, int namelen);
 	return ErrNoImpl
 }
 
-func (s *Sound) GetLength(lengthtype TimeUnit) (uint32, error) {
+func (s *Sound) Length(lengthtype TimeUnit) (uint32, error) {
 	var length C.uint
 	res := C.FMOD_Sound_GetLength(s.cptr, &length, C.FMOD_TIMEUNIT(lengthtype))
 	return uint32(length), errs[res]
 }
 
-func (s *Sound) GetFormat() (SoundType, SoundFormat, int, int, error) {
+func (s *Sound) Format() (SoundType, SoundFormat, int, int, error) {
 	var typ C.FMOD_SOUND_TYPE
 	var format C.FMOD_SOUND_FORMAT
 	var channels, bits C.int
@@ -123,24 +123,24 @@ func (s *Sound) GetFormat() (SoundType, SoundFormat, int, int, error) {
 	return SoundType(typ), SoundFormat(format), int(channels), int(bits), errs[res]
 }
 
-func (s *Sound) GetNumSubSounds() (int, error) {
+func (s *Sound) NumSubSounds() (int, error) {
 	var numsubsounds C.int
 	res := C.FMOD_Sound_GetNumSubSounds(s.cptr, &numsubsounds)
 	return int(numsubsounds), errs[res]
 }
 
-func (s *Sound) GetNumTags() (int, int, error) {
+func (s *Sound) NumTags() (int, int, error) {
 	var numtags, numtagsupdated C.int
 	res := C.FMOD_Sound_GetNumTags(s.cptr, &numtags, &numtagsupdated)
 	return int(numtags), int(numtagsupdated), errs[res]
 }
 
-func (s *Sound) GetTag(name *C.char, index C.int, tag *C.FMOD_TAG) error {
+func (s *Sound) Tag(name *C.char, index C.int, tag *C.FMOD_TAG) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetTag(FMOD_SOUND *sound, const char *name, int index, FMOD_TAG *tag);
 	return ErrNoImpl
 }
 
-func (s *Sound) GetOpenState(openstate *C.FMOD_OPENSTATE, percentbuffered *C.uint, starving, diskbusy *C.FMOD_BOOL) error {
+func (s *Sound) OpenState(openstate *C.FMOD_OPENSTATE, percentbuffered *C.uint, starving, diskbusy *C.FMOD_BOOL) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetOpenState(FMOD_SOUND *sound, FMOD_OPENSTATE *openstate, unsigned int *percentbuffered, FMOD_BOOL *starving, FMOD_BOOL *diskbusy);
 	return ErrNoImpl
 }
@@ -160,7 +160,7 @@ func (s *Sound) SetSoundGroup(soundgroup *SoundGroup) error {
 	return errs[res]
 }
 
-func (s *Sound) GetSoundGroup() (*SoundGroup, error) {
+func (s *Sound) SoundGroup() (*SoundGroup, error) {
 	var soundgroup SoundGroup
 	res := C.FMOD_Sound_GetSoundGroup(s.cptr, &soundgroup.cptr)
 	return &soundgroup, errs[res]
@@ -170,17 +170,17 @@ func (s *Sound) GetSoundGroup() (*SoundGroup, error) {
    Synchronization point API.  These points can come from markers embedded in wav files, and can also generate channel callbacks.
 */
 
-func (s *Sound) GetNumSyncPoints(numsyncpoints *C.int) error {
+func (s *Sound) NumSyncPoints(numsyncpoints *C.int) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetNumSyncPoints           (FMOD_SOUND *sound, int *numsyncpoints);
 	return ErrNoImpl
 }
 
-func (s *Sound) GetSyncPoint(index C.int, point **C.FMOD_SYNCPOINT) error {
+func (s *Sound) SyncPoint(index C.int, point **C.FMOD_SYNCPOINT) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetSyncPoint               (FMOD_SOUND *sound, int index, FMOD_SYNCPOINT **point);
 	return ErrNoImpl
 }
 
-func (s *Sound) GetSyncPointInfo(point *C.FMOD_SYNCPOINT, name *C.char, namelen C.int, offset *C.uint, offsettype C.FMOD_TIMEUNIT) error {
+func (s *Sound) SyncPointInfo(point *C.FMOD_SYNCPOINT, name *C.char, namelen C.int, offset *C.uint, offsettype C.FMOD_TIMEUNIT) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetSyncPointInfo           (FMOD_SOUND *sound, FMOD_SYNCPOINT *point, char *name, int namelen, unsigned int *offset, FMOD_TIMEUNIT offsettype);
 	return ErrNoImpl
 }
@@ -204,7 +204,7 @@ func (s *Sound) SetMode(mode Mode) error {
 	return errs[res]
 }
 
-func (s *Sound) GetMode() (Mode, error) {
+func (s *Sound) Mode() (Mode, error) {
 	var mode C.FMOD_MODE
 	res := C.FMOD_Sound_GetMode(s.cptr, &mode)
 	return Mode(mode), errs[res]
@@ -215,7 +215,7 @@ func (s *Sound) SetLoopCount(loopcount int) error {
 	return errs[res]
 }
 
-func (s *Sound) GetLoopCount() (int, error) {
+func (s *Sound) LoopCount() (int, error) {
 	var loopcount C.int
 	res := C.FMOD_Sound_GetLoopCount(s.cptr, &loopcount)
 	return int(loopcount), errs[res]
@@ -226,7 +226,7 @@ func (s *Sound) SetLoopPoints(loopstart uint32, loopstarttype TimeUnit, loopend 
 	return errs[res]
 }
 
-func (s *Sound) GetLoopPoints(loopstarttype, loopendtype TimeUnit) (uint32, uint32, error) {
+func (s *Sound) LoopPoints(loopstarttype, loopendtype TimeUnit) (uint32, uint32, error) {
 	var loopstart, loopend C.uint
 	res := C.FMOD_Sound_GetLoopPoints(s.cptr, &loopstart, C.FMOD_TIMEUNIT(loopstarttype), &loopend, C.FMOD_TIMEUNIT(loopendtype))
 	return uint32(loopstart), uint32(loopend), errs[res]
@@ -236,7 +236,7 @@ func (s *Sound) GetLoopPoints(loopstarttype, loopendtype TimeUnit) (uint32, uint
    For MOD/S3M/XM/IT/MID sequenced formats only.
 */
 
-func (s *Sound) GetMusicNumChannels() (int, error) {
+func (s *Sound) MusicNumChannels() (int, error) {
 	var numchannels C.int
 	res := C.FMOD_Sound_GetMusicNumChannels(s.cptr, &numchannels)
 	return int(numchannels), errs[res]
@@ -247,7 +247,7 @@ func (s *Sound) SetMusicChannelVolume(channel int, volume float64) error {
 	return errs[res]
 }
 
-func (s *Sound) GetMusicChannelVolume(channel int) (float64, error) {
+func (s *Sound) MusicChannelVolume(channel int) (float64, error) {
 	var volume C.float
 	res := C.FMOD_Sound_GetMusicChannelVolume(s.cptr, C.int(channel), &volume)
 	return float64(volume), errs[res]
@@ -258,7 +258,7 @@ func (s *Sound) SetMusicSpeed(speed float64) error {
 	return errs[res]
 }
 
-func (s *Sound) GetMusicSpeed() (float64, error) {
+func (s *Sound) MusicSpeed() (float64, error) {
 	var speed C.float
 	res := C.FMOD_Sound_GetMusicSpeed(s.cptr, &speed)
 	return float64(speed), errs[res]
@@ -273,7 +273,7 @@ func (s *Sound) SetUserData(userdata *interface{}) error {
 	return ErrNoImpl
 }
 
-func (s *Sound) GetUserData(userdata **interface{}) error {
+func (s *Sound) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetUserData                (FMOD_SOUND *sound, void **userdata);
 	return ErrNoImpl
 }

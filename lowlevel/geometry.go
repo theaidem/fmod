@@ -29,19 +29,19 @@ func (g *Geometry) AddPolygon(directocclusion, reverbocclusion float64, doublesi
 	return errs[res]
 }
 
-func (g *Geometry) GetNumPolygons() (int, error) {
+func (g *Geometry) NumPolygons() (int, error) {
 	var numpolygons C.int
 	res := C.FMOD_Geometry_GetNumPolygons(g.cptr, &numpolygons)
 	return int(numpolygons), errs[res]
 }
 
-func (g *Geometry) GetMaxPolygons() (int, int, error) {
+func (g *Geometry) MaxPolygons() (int, int, error) {
 	var maxpolygons, maxvertices C.int
 	res := C.FMOD_Geometry_GetMaxPolygons(g.cptr, &maxpolygons, &maxvertices)
 	return int(maxpolygons), int(maxvertices), errs[res]
 }
 
-func (g *Geometry) GetPolygonNumVertices(index int) (int, error) {
+func (g *Geometry) PolygonNumVertices(index int) (int, error) {
 	var numvertices C.int
 	res := C.FMOD_Geometry_GetPolygonNumVertices(g.cptr, C.int(index), &numvertices)
 	return int(numvertices), errs[res]
@@ -53,7 +53,7 @@ func (g *Geometry) SetPolygonVertex(index, vertexindex int, vertex Vector) error
 	return errs[res]
 }
 
-func (g *Geometry) GetPolygonVertex(index, vertexindex int) (Vector, error) {
+func (g *Geometry) PolygonVertex(index, vertexindex int) (Vector, error) {
 	var cvertex C.FMOD_VECTOR
 	var vertex Vector
 	res := C.FMOD_Geometry_GetPolygonVertex(g.cptr, C.int(index), C.int(vertexindex), &cvertex)
@@ -66,7 +66,7 @@ func (g *Geometry) SetPolygonAttributes(index int, directocclusion, reverbocclus
 	return errs[res]
 }
 
-func (g *Geometry) GetPolygonAttributes(index int) (float64, float64, bool, error) {
+func (g *Geometry) PolygonAttributes(index int) (float64, float64, bool, error) {
 	var directocclusion, reverbocclusion C.float
 	var doublesided C.FMOD_BOOL
 	res := C.FMOD_Geometry_GetPolygonAttributes(g.cptr, C.int(index), &directocclusion, &reverbocclusion, &doublesided)
@@ -82,7 +82,7 @@ func (g *Geometry) SetActive(active bool) error {
 	return errs[res]
 }
 
-func (g *Geometry) GetActive() (bool, error) {
+func (g *Geometry) IsActive() (bool, error) {
 	var active C.FMOD_BOOL
 	res := C.FMOD_Geometry_GetActive(g.cptr, &active)
 	return setBool(active), errs[res]
@@ -95,7 +95,7 @@ func (g *Geometry) SetRotation(forward, up Vector) error {
 	return errs[res]
 }
 
-func (g *Geometry) GetRotation() (Vector, Vector, error) {
+func (g *Geometry) Rotation() (Vector, Vector, error) {
 	var cforward, cup C.FMOD_VECTOR
 	var forward, up Vector
 	res := C.FMOD_Geometry_GetRotation(g.cptr, &cforward, &cup)
@@ -110,7 +110,7 @@ func (g *Geometry) SetPosition(position Vector) error {
 	return errs[res]
 }
 
-func (g *Geometry) GetPosition() (Vector, error) {
+func (g *Geometry) Position() (Vector, error) {
 	var cposition C.FMOD_VECTOR
 	var position Vector
 	res := C.FMOD_Geometry_GetPosition(g.cptr, &cposition)
@@ -124,7 +124,7 @@ func (g *Geometry) SetScale(scale Vector) error {
 	return errs[res]
 }
 
-func (g *Geometry) GetScale() (Vector, error) {
+func (g *Geometry) Scale() (Vector, error) {
 	var cscale C.FMOD_VECTOR
 	var scale Vector
 	res := C.FMOD_Geometry_GetScale(g.cptr, &cscale)
@@ -146,7 +146,7 @@ func (g *Geometry) SetUserData(userdata *interface{}) error {
 	return ErrNoImpl
 }
 
-func (g *Geometry) GetUserData(userdata **interface{}) error {
+func (g *Geometry) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_Geometry_GetUserData(FMOD_GEOMETRY *geometry, void **userdata);
 	return ErrNoImpl
 }

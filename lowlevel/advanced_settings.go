@@ -11,85 +11,139 @@ import (
 )
 
 type AdvancedSettings struct {
-	/* [w]   Size of this structure.  Use sizeof(FMOD_ADVANCEDSETTINGS)  NOTE: This must be set before calling System::getAdvancedSettings or System::setAdvancedSettings! */
+	// [w]   Size of this structure.
+	// Use sizeof(FMOD_ADVANCEDSETTINGS)
+	// NOTE: This must be set before calling System.AdvancedSettings or System.SetAdvancedSettings!
 	CbSize int
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_CREATECOMPRESSEDSAMPLE only.  MPEG   codecs consume 30,528 bytes per instance and this number will determine how many MPEG   channels can be played simultaneously. Default = 32. */
+	// [r/w] Optional. Specify 0 to ignore. Default = 32.
+	// For use with FMOD_CREATECOMPRESSEDSAMPLE only.
+	// MPEG   codecs consume 30,528 bytes per instance and this number will determine how many MPEG   channels can be played simultaneously.
 	MaxMPEGCodecs int
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_CREATECOMPRESSEDSAMPLE only.  ADPCM  codecs consume  3,128 bytes per instance and this number will determine how many ADPCM  channels can be played simultaneously. Default = 32. */
+	// [r/w] Optional. Specify 0 to ignore.  Default = 32.
+	// For use with FMOD_CREATECOMPRESSEDSAMPLE only.
+	// ADPCM  codecs consume  3,128 bytes per instance and this number will determine how many ADPCM  channels can be played simultaneously.
 	MaxADPCMCodecs int
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_CREATECOMPRESSEDSAMPLE only.  XMA    codecs consume 14,836 bytes per instance and this number will determine how many XMA    channels can be played simultaneously. Default = 32. */
+	// [r/w] Optional. Specify 0 to ignore.  Default = 32.
+	// For use with FMOD_CREATECOMPRESSEDSAMPLE only.
+	// XMA    codecs consume 14,836 bytes per instance and this number will determine how many XMA    channels can be played simultaneously.
 	MaxXMACodecs int
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_CREATECOMPRESSEDSAMPLE only.  Vorbis codecs consume 23,256 bytes per instance and this number will determine how many Vorbis channels can be played simultaneously. Default = 32. */
+	// [r/w] Optional. Specify 0 to ignore.  Default = 32.
+	// For use with FMOD_CREATECOMPRESSEDSAMPLE only.
+	// Vorbis codecs consume 23,256 bytes per instance and this number will determine how many Vorbis channels can be played simultaneously.
 	MaxVorbisCodecs int
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_CREATECOMPRESSEDSAMPLE only.  AT9    codecs consume  8,720 bytes per instance and this number will determine how many AT9    channels can be played simultaneously. Default = 32. */
+	// [r/w] Optional. Specify 0 to ignore. Default = 32.
+	// For use with FMOD_CREATECOMPRESSEDSAMPLE only.
+	// AT9    codecs consume  8,720 bytes per instance and this number will determine how many AT9    channels can be played simultaneously.
 	MaxAT9Codecs int
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_CREATECOMPRESSEDSAMPLE only.  This number will determine how many FADPCM channels can be played simultaneously. Default = 32. */
+	// [r/w] Optional. Specify 0 to ignore.  Default = 32.
+	// For use with FMOD_CREATECOMPRESSEDSAMPLE only.
+	// This number will determine how many FADPCM channels can be played simultaneously.
 	MaxFADPCMCodecs int
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with PS3 only. PCM    codecs consume 12,672 bytes per instance and this number will determine how many streams and PCM voices can be played simultaneously. Default = 16. */
+	// [r/w] Optional. Specify 0 to ignore.  Default = 16.
+	// For use with PS3 only.
+	// PCM    codecs consume 12,672 bytes per instance and this number will determine how many streams and PCM voices can be played simultaneously.
 	MaxPCMCodecs int
 
-	/* [r/w] Optional. Specify 0 to ignore. Number of channels available on the ASIO device. */
+	// [r/w] Optional. Specify 0 to ignore.
+	// Number of channels available on the ASIO device.
 	ASIONumChannels int
 
-	/* [r/w] Optional. Specify 0 to ignore. Pointer to an array of strings (number of entries defined by ASIONumChannels) with ASIO channel names. */
-	ASIOChannelList []string //**ASIOChannelList
+	// [r/w] Optional. Specify 0 to ignore.
+	// Pointer to an array of strings (number of entries defined by ASIONumChannels) with ASIO channel names.
+	ASIOChannelList []string
 
-	/* [r/w] Optional. Specify 0 to ignore. Pointer to a list of speakers that the ASIO channels map to.  This can be called after System::init to remap ASIO output. */
+	// [r/w] Optional. Specify 0 to ignore.
+	// Pointer to a list of speakers that the ASIO channels map to.  This can be called after System.Init to remap ASIO output.
 	ASIOSpeakerList *Speaker //FMOD_SPEAKER
 
-	/* [r/w] Optional.                      For use with FMOD_INIT_HRTF_LOWPASS.  The angle range (0-360) of a 3D sound in relation to the listener, at which the HRTF function begins to have an effect. 0 = in front of the listener. 180 = from 90 degrees to the left of the listener to 90 degrees to the right. 360 = behind the listener. Default = 180.0. */
+	// [r/w] Optional. Default = 180.0.
+	// For use with FMOD_INIT_HRTF_LOWPASS.
+	// The angle range (0-360) of a 3D sound in relation to the listener, at which the HRTF function begins to have an effect.
+	// 0 = in front of the listener.
+	// 180 = from 90 degrees to the left of the listener to 90 degrees to the right.
+	// 360 = behind the listener.
 	HRTFMinAngle float64
 
-	/* [r/w] Optional.                      For use with FMOD_INIT_HRTF_LOWPASS.  The angle range (0-360) of a 3D sound in relation to the listener, at which the HRTF function has maximum effect. 0 = front of the listener. 180 = from 90 degrees to the left of the listener to 90 degrees to the right. 360 = behind the listener. Default = 360.0. */
+	// [r/w] Optional. Default = 360.0.
+	// For use with FMOD_INIT_HRTF_LOWPASS.
+	// The angle range (0-360) of a 3D sound in relation to the listener, at which the HRTF function has maximum effect.
+	// 0 = front of the listener.
+	// 180 = from 90 degrees to the left of the listener to 90 degrees to the right.
+	// 360 = behind the listener.
 	HRTFMaxAngle float64
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_INIT_HRTF_LOWPASS.  The cutoff frequency of the HRTF's lowpass filter function when at maximum effect. (i.e. at HRTFMaxAngle).  Default = 4000.0. */
+	// [r/w] Optional. Specify 0 to ignore.  Default = 4000.0.
+	// For use with FMOD_INIT_HRTF_LOWPASS.
+	// The cutoff frequency of the HRTF's lowpass filter function when at maximum effect. (i.e. at HRTFMaxAngle).
 	HRTFFreq float64
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_INIT_VOL0_BECOMES_VIRTUAL.  If this flag is used, and the volume is below this, then the sound will become virtual.  Use this value to raise the threshold to a different point where a sound goes virtual. */
+	// [r/w] Optional. Specify 0 to ignore.
+	// For use with FMOD_INIT_VOL0_BECOMES_VIRTUAL.
+	// If this flag is used, and the volume is below this, then the sound will become virtual.
+	// Use this value to raise the threshold to a different point where a sound goes virtual.
 	Vol0virtualvol float64
 
-	/* [r/w] Optional. Specify 0 to ignore. For streams. This determines the default size of the double buffer (in milliseconds) that a stream uses.  Default = 400ms */
+	// [r/w] Optional. Specify 0 to ignore.   Default = 400ms
+	// For streams. This determines the default size of the double buffer (in milliseconds) that a stream uses.
 	DefaultDecodeBufferSize uint32
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_INIT_PROFILE_ENABLE.  Specify the port to listen on for connections by the profiler application. */
+	// [r/w] Optional. Specify 0 to ignore.
+	// For use with FMOD_INIT_PROFILE_ENABLE.
+	// Specify the port to listen on for connections by the profiler application.
 	ProfilePort uint16
 
-	/* [r/w] Optional. Specify 0 to ignore. The maximum time in miliseconds it takes for a channel to fade to the new level when its occlusion changes. */
+	// [r/w] Optional. Specify 0 to ignore.
+	// The maximum time in miliseconds it takes for a channel to fade to the new level when its occlusion changes.
 	GeometryMaxFadeTime uint32
 
-	/* [r/w] Optional. Specify 0 to ignore. For use with FMOD_INIT_DISTANCE_FILTERING.  The default center frequency in Hz for the distance filtering effect. Default = 1500.0. */
+	// [r/w] Optional. Specify 0 to ignore.  Default = 1500.0.
+	// For use with FMOD_INIT_DISTANCE_FILTERING.
+	// The default center frequency in Hz for the distance filtering effect.
 	DistanceFilterCenterFreq float64
 
-	/* [r/w] Optional. Specify 0 to ignore. Out of 0 to 3, 3d reverb spheres will create a phyical reverb unit on this instance slot.  See FMOD_REVERB_PROPERTIES. */
+	// [r/w] Optional. Specify 0 to ignore.
+	// Out of 0 to 3, 3d reverb spheres will create a phyical reverb unit on this instance slot.
+	// See FMOD_REVERB_PROPERTIES.
 	Reverb3Dinstance int
 
-	/* [r/w] Optional. Specify 0 to ignore. Number of buffers in DSP buffer pool.  Each buffer will be DSPBlockSize * sizeof(float) * SpeakerModeChannelCount.  ie 7.1 @ 1024 DSP block size = 8 * 1024 * 4 = 32kb.  Default = 8. */
+	// [r/w] Optional. Specify 0 to ignore. Default = 8.
+	// Number of buffers in DSP buffer pool.
+	// Each buffer will be DSPBlockSize * sizeof(float) * SpeakerModeChannelCount.  ie 7.1 @ 1024 DSP block size = 8 * 1024 * 4 = 32kb.
 	DSPBufferPoolSize int
 
-	/* [r/w] Optional. Specify 0 to ignore. Specify the stack size for the FMOD Stream thread in bytes.  Useful for custom codecs that use excess stack.  Default 49,152 (48kb) */
+	// [r/w] Optional. Specify 0 to ignore. Default 49,152 (48kb)
+	// Specify the stack size for the FMOD Stream thread in bytes.
+	// Useful for custom codecs that use excess stack.
 	StackSizeStream uint32
 
-	/* [r/w] Optional. Specify 0 to ignore. Specify the stack size for the FMOD_NONBLOCKING loading thread.  Useful for custom codecs that use excess stack.  Default 65,536 (64kb) */
+	// [r/w] Optional. Specify 0 to ignore.   Default 65,536 (64kb)
+	// Specify the stack size for the FMOD_NONBLOCKING loading thread.
+	// Useful for custom codecs that use excess stack.
 	StackSizeNonBlocking uint32
 
-	/* [r/w] Optional. Specify 0 to ignore. Specify the stack size for the FMOD mixer thread.  Useful for custom dsps that use excess stack.  Default 49,152 (48kb) */
+	// [r/w] Optional. Specify 0 to ignore.   Default 49,152 (48kb)
+	// Specify the stack size for the FMOD mixer thread.
+	// Useful for custom dsps that use excess stack.
 	StackSizeMixer uint32
 
-	/* [r/w] Optional. Specify 0 to ignore. Resampling method used with fmod's software mixer.  See FMOD_DSP_RESAMPLER for details on methods. */
+	// [r/w] Optional. Specify 0 to ignore.
+	// Resampling method used with fmod's software mixer.
+	// See FMOD_DSP_RESAMPLER for details on methods.
 	ReSamplerMethod DSPReSampler
 
-	/* [r/w] Optional. Specify 0 to ignore. Specify the command queue size for thread safe processing.  Default 2048 (2kb) */
+	// [r/w] Optional. Specify 0 to ignore. Default 2048 (2kb)
+	// Specify the command queue size for thread safe processing.
 	CommandQueueSize uint32
 
-	/* [r/w] Optional. Specify 0 to ignore. Seed value that FMOD will use to initialize its internal random number generators. */
+	// [r/w] Optional. Specify 0 to ignore.
+	// Seed value that FMOD will use to initialize its internal random number generators.
 	RandomSeed uint32
 }
 

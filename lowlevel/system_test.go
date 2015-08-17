@@ -51,7 +51,7 @@ func TestSystemInstance(t *testing.T) {
 	}
 
 	//Get System version
-	v, err := system.GetVersion()
+	v, err := system.Version()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -60,7 +60,7 @@ func TestSystemInstance(t *testing.T) {
 		t.Error("expected more than zero but got", v)
 	}
 
-	channels, err := system.GetChannelsPlaying()
+	channels, err := system.ChannelsPlaying()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -69,14 +69,14 @@ func TestSystemInstance(t *testing.T) {
 		t.Error("expected ", 0, " but got", v)
 	}
 
-	cpu, err := system.GetCPUUsage()
+	cpu, err := system.CPUUsage()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	t.Logf("%#v\n", cpu)
 
-	ram, err := system.GetSoundRAM()
+	ram, err := system.SoundRAM()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -93,7 +93,7 @@ func TestSystemSetup(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	output, err := system.GetOutput()
+	output, err := system.Output()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -102,14 +102,14 @@ func TestSystemSetup(t *testing.T) {
 		t.Error("Hmmm, output isn't detected?")
 	}
 
-	drivers, err := system.GetNumDrivers()
+	drivers, err := system.NumDrivers()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	t.Log(drivers)
 
-	guid, systemrate, speakermode, speakermodechannels, err := system.GetDriverInfo(0, "", 0)
+	guid, systemrate, speakermode, speakermodechannels, err := system.DriverInfo(0, "")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -124,14 +124,14 @@ func TestSystemSetup(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	driver, err := system.GetDriver()
+	driver, err := system.Driver()
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	t.Log(driver)
 
-	channels, err := system.GetSoftwareChannels()
+	channels, err := system.SoftwareChannels()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -140,7 +140,7 @@ func TestSystemSetup(t *testing.T) {
 		t.Error("expected", 64, "got", channels)
 	}
 
-	samplerate, speakermode, numrawspeakers, err := system.GetSoftwareFormat()
+	samplerate, speakermode, numrawspeakers, err := system.SoftwareFormat()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -149,7 +149,7 @@ func TestSystemSetup(t *testing.T) {
 	t.Logf("%#v\n", speakermode)
 	t.Logf("%#v\n", numrawspeakers)
 
-	bufferlength, numbuffers, err := system.GetDSPBufferSize()
+	bufferlength, numbuffers, err := system.DSPBufferSize()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -167,17 +167,17 @@ func TestSystemPlugins(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	codecplugins, err := system.GetNumPlugins(PLUGINTYPE_CODEC)
+	codecplugins, err := system.NumPlugins(PLUGINTYPE_CODEC)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	dspplugins, err := system.GetNumPlugins(PLUGINTYPE_DSP)
+	dspplugins, err := system.NumPlugins(PLUGINTYPE_DSP)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	outplugins, err := system.GetNumPlugins(PLUGINTYPE_OUTPUT)
+	outplugins, err := system.NumPlugins(PLUGINTYPE_OUTPUT)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -196,7 +196,7 @@ func TestSystemPostInit(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	x, y, active, err := system.GetSpeakerPosition(SPEAKER_FRONT_LEFT)
+	x, y, active, err := system.SpeakerPosition(SPEAKER_FRONT_LEFT)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -206,7 +206,7 @@ func TestSystemPostInit(t *testing.T) {
 	t.Logf("SPEAKER_FRONT_LEFT Y: %#v\n", y)
 	t.Log("")
 
-	x, y, active, err = system.GetSpeakerPosition(SPEAKER_FRONT_RIGHT)
+	x, y, active, err = system.SpeakerPosition(SPEAKER_FRONT_RIGHT)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -258,7 +258,7 @@ func TestSystemCreation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	playing, err := system.GetChannelsPlaying()
+	playing, err := system.ChannelsPlaying()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -277,7 +277,7 @@ func TestSystemCreation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	x, y, active, err := system.GetSpeakerPosition(SPEAKER_FRONT_LEFT)
+	x, y, active, err := system.SpeakerPosition(SPEAKER_FRONT_LEFT)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -287,7 +287,7 @@ func TestSystemCreation(t *testing.T) {
 	t.Logf("SPEAKER_FRONT_LEFT Y: %#v\n", y)
 	t.Log("")
 
-	x, y, active, err = system.GetSpeakerPosition(SPEAKER_FRONT_RIGHT)
+	x, y, active, err = system.SpeakerPosition(SPEAKER_FRONT_RIGHT)
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -6,9 +6,6 @@ package lowlevel
 import "C"
 
 type Vector struct {
-	/* X co-ordinate in 3D space. */
-	/* Y co-ordinate in 3D space. */
-	/* Z co-ordinate in 3D space. */
 	X, Y, Z float32
 }
 

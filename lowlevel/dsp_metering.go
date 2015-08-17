@@ -6,10 +6,17 @@ package lowlevel
 import "C"
 
 type DSPMeteringInfo struct {
-	Numsamples  int     /* [r] The number of samples considered for this metering info. */
-	Peaklevel   float64 /* [r] The peak level per channel. */
-	Rmslevel    float64 /* [r] The rms level per channel. */
-	Numchannels int16   /* [r] Number of channels. */
+	// [r] The number of samples considered for this metering info.
+	Numsamples int
+
+	// [r] The peak level per channel.
+	Peaklevel float64
+
+	// [r] The rms level per channel.
+	Rmslevel float64
+
+	// [r] Number of channels.
+	Numchannels int16
 }
 
 func NewDSPMeteringInfo() DSPMeteringInfo {

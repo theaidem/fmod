@@ -21,7 +21,7 @@ func TestSoundCreate(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	frequency, priority, err := censor.GetDefaults()
+	frequency, priority, err := censor.Defaults()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -29,22 +29,22 @@ func TestSoundCreate(t *testing.T) {
 	t.Logf("censorFrequency: %#v\n", frequency)
 	t.Logf("censorPriority: %#v\n", priority)
 
-	msLength, err := censor.GetLength(TIMEUNIT_MS)
+	msLength, err := censor.Length(TIMEUNIT_MS)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	pcmLength, err := censor.GetLength(TIMEUNIT_PCM)
+	pcmLength, err := censor.Length(TIMEUNIT_PCM)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	pcmBytesLength, err := censor.GetLength(TIMEUNIT_PCMBYTES)
+	pcmBytesLength, err := censor.Length(TIMEUNIT_PCMBYTES)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	rawBytesLength, err := censor.GetLength(TIMEUNIT_RAWBYTES)
+	rawBytesLength, err := censor.Length(TIMEUNIT_RAWBYTES)
 	if err != nil {
 		t.Fatal(err)
 	}

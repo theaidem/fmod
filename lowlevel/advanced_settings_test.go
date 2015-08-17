@@ -22,7 +22,7 @@ func TestAdvancedSettings(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	get_settings, err := system.GetAdvancedSettings()
+	get_settings, err := system.AdvancedSettings()
 	if err != nil {
 		t.Fatal(err)
 	}
