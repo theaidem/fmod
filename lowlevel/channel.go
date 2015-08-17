@@ -122,6 +122,7 @@ func (c *Channel) Mode() (Mode, error) {
 	return Mode(mode), errs[res]
 }
 
+// NOTE: Not implement yet
 func (c *Channel) SetCallback(callback C.FMOD_CHANNELCONTROL_CALLBACK) error {
 	//FMOD_RESULT F_API FMOD_Channel_SetCallback(FMOD_CHANNEL *channel, FMOD_CHANNELCONTROL_CALLBACK callback);
 	return ErrNoImpl
@@ -147,16 +148,19 @@ func (c *Channel) SetMixLevelsOutput(frontleft, frontright, center, lfe, surroun
 	return errs[res]
 }
 
+// NOTE: Not implement yet
 func (c *Channel) SetMixLevelsInput(levels *C.float, numlevels C.int) error {
 	//FMOD_RESULT F_API FMOD_Channel_SetMixLevelsInput(FMOD_CHANNEL *channel, float *levels, int numlevels);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (c *Channel) SetMixMatrix(matrix *C.float, outchannels, inchannels, inchannel_hop C.int) error {
 	//FMOD_RESULT F_API FMOD_Channel_SetMixMatrix(FMOD_CHANNEL *channel, float *matrix, int outchannels, int inchannels, int inchannel_hop);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (c *Channel) MixMatrix(matrix *C.float, outchannels, inchannels *C.int, inchannel_hop C.int) error {
 	//FMOD_RESULT F_API FMOD_Channel_GetMixMatrix(FMOD_CHANNEL *channel, float *matrix, int *outchannels, int *inchannels, int inchannel_hop);
 	return ErrNoImpl
@@ -244,6 +248,7 @@ func (c *Channel) DSPIndex(dsp DSP) (int, error) {
 	return int(index), errs[res]
 }
 
+// NOTE: Not implement yet
 func (c *Channel) OverridePanDSP(pan *C.FMOD_DSP) error {
 	//FMOD_RESULT F_API FMOD_Channel_OverridePanDSP           (FMOD_CHANNEL *channel, FMOD_DSP *pan);
 	return ErrNoImpl
@@ -382,11 +387,13 @@ func (c *Channel) Get3DDistanceFilter() (bool, float64, float64, error) {
    Userdata set/get.
 */
 
+// NOTE: Not implement yet
 func (c *Channel) SetUserData(userdata *interface{}) error {
 	//FMOD_RESULT F_API FMOD_Channel_SetUserData              (FMOD_CHANNEL *channel, void *userdata);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (c *Channel) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_Channel_GetUserData              (FMOD_CHANNEL *channel, void **userdata);
 	return ErrNoImpl

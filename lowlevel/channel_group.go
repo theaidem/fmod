@@ -122,6 +122,7 @@ func (c *ChannelGroup) Mode() (Mode, error) {
 	return Mode(mode), errs[res]
 }
 
+// NOTE: Not implement yet
 func (c *ChannelGroup) SetCallback(callback C.FMOD_CHANNELCONTROL_CALLBACK) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_SetCallback         (FMOD_CHANNELGROUP *channelgroup, FMOD_CHANNELCONTROL_CALLBACK callback);
 	return ErrNoImpl
@@ -147,16 +148,19 @@ func (c *ChannelGroup) SetMixLevelsOutput(frontleft, frontright, center, lfe, su
 	return errs[res]
 }
 
+// NOTE: Not implement yet
 func (c *ChannelGroup) SetMixLevelsInput(levels *C.float, numlevels C.int) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_SetMixLevelsInput   (FMOD_CHANNELGROUP *channelgroup, float *levels, int numlevels);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (c *ChannelGroup) SetMixMatrix(matrix *C.float, outchannels, inchannels, inchannel_hop C.int) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_SetMixMatrix        (FMOD_CHANNELGROUP *channelgroup, float *matrix, int outchannels, int inchannels, int inchannel_hop);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (c *ChannelGroup) MixMatrix(matrix *C.float, outchannels, inchannels *C.int, inchannel_hop C.int) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetMixMatrix        (FMOD_CHANNELGROUP *channelgroup, float *matrix, int *outchannels, int *inchannels, int inchannel_hop);
 	return ErrNoImpl
@@ -244,6 +248,7 @@ func (c *ChannelGroup) DSPIndex(dsp DSP) (int, error) {
 	return int(index), errs[res]
 }
 
+// NOTE: Not implement yet
 func (c *ChannelGroup) OverridePanDSP(pan *C.FMOD_DSP) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_OverridePanDSP      (FMOD_CHANNELGROUP *channelgroup, FMOD_DSP *pan);
 	return ErrNoImpl
@@ -382,11 +387,13 @@ func (c *ChannelGroup) Get3DDistanceFilter() (bool, float64, float64, error) {
    Userdata set/get.
 */
 
+// NOTE: Not implement yet
 func (c *ChannelGroup) SetUserData(userdata *interface{}) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_SetUserData(FMOD_CHANNELGROUP *channelgroup, void *userdata);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (c *ChannelGroup) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetUserData(FMOD_CHANNELGROUP *channelgroup, void **userdata);
 	return ErrNoImpl
@@ -433,6 +440,7 @@ func (c *ChannelGroup) ParentGroup() (ChannelGroup, error) {
    Information only functions.
 */
 
+// NOTE: Not implement yet
 func (c *ChannelGroup) Name(name *C.char, namelen C.int) error {
 	//FMOD_RESULT F_API FMOD_ChannelGroup_GetName(FMOD_CHANNELGROUP *channelgroup, char *name, int namelen);
 	return ErrNoImpl

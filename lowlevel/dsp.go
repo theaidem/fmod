@@ -152,26 +152,31 @@ func (d *DSP) SetParameterBool(index int, value bool) error {
 	return errs[res]
 }
 
+// NOTE: Not implement yet
 func (d *DSP) SetParameterData(index C.int, data *interface{}, length C.uint) error {
 	//FMOD_RESULT F_API FMOD_DSP_SetParameterData(FMOD_DSP *dsp, int index, void *data, unsigned int length);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (d *DSP) ParameterFloat(index C.int, value *C.float, valuestr *C.char, valuestrlen C.int) error {
 	//FMOD_RESULT F_API FMOD_DSP_GetParameterFloat(FMOD_DSP *dsp, int index, float *value, char *valuestr, int valuestrlen);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (d *DSP) ParameterInt(index C.int, value *C.int, valuestr *C.char, valuestrlen C.int) error {
 	//FMOD_RESULT F_API FMOD_DSP_GetParameterInt(FMOD_DSP *dsp, int index, int *value, char *valuestr, int valuestrlen);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (d *DSP) ParameterBool(index C.int, value *C.FMOD_BOOL, valuestr *C.char, valuestrlen C.int) error {
 	//FMOD_RESULT F_API FMOD_DSP_GetParameterBool(FMOD_DSP *dsp, int index, FMOD_BOOL *value, char *valuestr, int valuestrlen);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (d *DSP) ParameterData(index C.int, data **interface{}, length *C.uint, valuestr *C.char, valuestrlen C.int) error {
 	//FMOD_RESULT F_API FMOD_DSP_GetParameterData(FMOD_DSP *dsp, int index, void **data, unsigned int *length, char *valuestr, int valuestrlen);
 	return ErrNoImpl
@@ -183,16 +188,19 @@ func (d *DSP) NumParameters() (int, error) {
 	return int(numparams), errs[res]
 }
 
+// NOTE: Not implement yet
 func (d *DSP) ParameterInfo(index C.int, desc **C.FMOD_DSP_PARAMETER_DESC) error {
 	//FMOD_RESULT F_API FMOD_DSP_GetParameterInfo             (FMOD_DSP *dsp, int index, FMOD_DSP_PARAMETER_DESC **desc);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (d *DSP) DataParameterIndex(datatype C.int, index *C.int) error {
 	//FMOD_RESULT F_API FMOD_DSP_GetDataParameterIndex        (FMOD_DSP *dsp, int datatype, int *index);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (d *DSP) ShowConfigDialog(hwnd *interface{}, show C.FMOD_BOOL) error {
 	//FMOD_RESULT F_API FMOD_DSP_ShowConfigDialog             (FMOD_DSP *dsp, void *hwnd, FMOD_BOOL show);
 	return ErrNoImpl
@@ -202,6 +210,7 @@ func (d *DSP) ShowConfigDialog(hwnd *interface{}, show C.FMOD_BOOL) error {
    DSP attributes.
 */
 
+// NOTE: Not implement yet
 func (d *DSP) Info(name *C.char, version *C.uint, channels, configwidth, configheight *C.int) error {
 	//FMOD_RESULT F_API FMOD_DSP_GetInfo(FMOD_DSP *dsp, char *name, unsigned int *version, int *channels, int *configwidth, int *configheight);
 	return ErrNoImpl
@@ -223,13 +232,15 @@ func (d *DSP) Idle() (bool, error) {
    Userdata set/get.
 */
 
+// NOTE: Not implement yet
 func (d *DSP) SetUserData(userdata *interface{}) error {
-	//FMOD_RESULT F_API FMOD_DSP_SetUserData                  (FMOD_DSP *dsp, void *userdata);
+	//FMOD_RESULT F_API FMOD_DSP_SetUserData(FMOD_DSP *dsp, void *userdata);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (d *DSP) UserData(userdata **interface{}) error {
-	//FMOD_RESULT F_API FMOD_DSP_GetUserData                  (FMOD_DSP *dsp, void **userdata);
+	//FMOD_RESULT F_API FMOD_DSP_GetUserData(FMOD_DSP *dsp, void **userdata);
 	return ErrNoImpl
 }
 

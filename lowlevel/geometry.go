@@ -132,6 +132,7 @@ func (g *Geometry) Scale() (Vector, error) {
 	return scale, errs[res]
 }
 
+// NOTE: Not implement yet
 func (g *Geometry) Save(data *interface{}, datasize *C.int) error {
 	//FMOD_RESULT F_API FMOD_Geometry_Save(FMOD_GEOMETRY *geometry, void *data, int *datasize);
 	return ErrNoImpl
@@ -141,11 +142,13 @@ func (g *Geometry) Save(data *interface{}, datasize *C.int) error {
    Userdata set/get.
 */
 
+// NOTE: Not implement yet
 func (g *Geometry) SetUserData(userdata *interface{}) error {
 	//FMOD_RESULT F_API FMOD_Geometry_SetUserData(FMOD_GEOMETRY *geometry, void *userdata);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (g *Geometry) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_Geometry_GetUserData(FMOD_GEOMETRY *geometry, void **userdata);
 	return ErrNoImpl

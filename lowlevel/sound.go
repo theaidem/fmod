@@ -28,11 +28,13 @@ func (s *Sound) SystemObject() (*System, error) {
    Standard sound manipulation functions.
 */
 
+// NOTE: Not implement yet
 func (s *Sound) Lock(offset, length C.uint, ptr1, ptr2 **interface{}, len1, len2 *C.uint) error {
 	//FMOD_RESULT F_API FMOD_Sound_Lock(FMOD_SOUND *sound, unsigned int offset, unsigned int length, void **ptr1, void **ptr2, unsigned int *len1, unsigned int *len2);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *Sound) Unlock(ptr1, ptr2 *interface{}, len1, len2 C.uint) error {
 	//FMOD_RESULT F_API FMOD_Sound_Unlock(FMOD_SOUND *sound, void *ptr1, void *ptr2, unsigned int len1, unsigned int len2);
 	return ErrNoImpl
@@ -104,6 +106,7 @@ func (s *Sound) SubSoundParent() (*Sound, error) {
 	return &parentsound, errs[res]
 }
 
+// NOTE: Not implement yet
 func (s *Sound) Name(name *C.char, namelen C.int) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetName(FMOD_SOUND *sound, char *name, int namelen);
 	return ErrNoImpl
@@ -135,21 +138,25 @@ func (s *Sound) NumTags() (int, int, error) {
 	return int(numtags), int(numtagsupdated), errs[res]
 }
 
+// NOTE: Not implement yet
 func (s *Sound) Tag(name *C.char, index C.int, tag *C.FMOD_TAG) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetTag(FMOD_SOUND *sound, const char *name, int index, FMOD_TAG *tag);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *Sound) OpenState(openstate *C.FMOD_OPENSTATE, percentbuffered *C.uint, starving, diskbusy *C.FMOD_BOOL) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetOpenState(FMOD_SOUND *sound, FMOD_OPENSTATE *openstate, unsigned int *percentbuffered, FMOD_BOOL *starving, FMOD_BOOL *diskbusy);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *Sound) ReadData(buffer *interface{}, lenbytes C.uint, read C.uint) error {
 	//FMOD_RESULT F_API FMOD_Sound_ReadData(FMOD_SOUND *sound, void *buffer, unsigned int lenbytes, unsigned int *read);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *Sound) SeekData(pcm C.uint) error {
 	//FMOD_RESULT F_API FMOD_Sound_SeekData(FMOD_SOUND *sound, unsigned int pcm);
 	return ErrNoImpl
@@ -170,26 +177,31 @@ func (s *Sound) SoundGroup() (*SoundGroup, error) {
    Synchronization point API.  These points can come from markers embedded in wav files, and can also generate channel callbacks.
 */
 
+// NOTE: Not implement yet
 func (s *Sound) NumSyncPoints(numsyncpoints *C.int) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetNumSyncPoints           (FMOD_SOUND *sound, int *numsyncpoints);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *Sound) SyncPoint(index C.int, point **C.FMOD_SYNCPOINT) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetSyncPoint               (FMOD_SOUND *sound, int index, FMOD_SYNCPOINT **point);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *Sound) SyncPointInfo(point *C.FMOD_SYNCPOINT, name *C.char, namelen C.int, offset *C.uint, offsettype C.FMOD_TIMEUNIT) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetSyncPointInfo           (FMOD_SOUND *sound, FMOD_SYNCPOINT *point, char *name, int namelen, unsigned int *offset, FMOD_TIMEUNIT offsettype);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *Sound) AddSyncPoint(offset C.uint, offsettype C.FMOD_TIMEUNIT, name *C.char, point **C.FMOD_SYNCPOINT) error {
 	//FMOD_RESULT F_API FMOD_Sound_AddSyncPoint               (FMOD_SOUND *sound, unsigned int offset, FMOD_TIMEUNIT offsettype, const char *name, FMOD_SYNCPOINT **point);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *Sound) DeleteSyncPoint(point *C.FMOD_SYNCPOINT) error {
 	//FMOD_RESULT F_API FMOD_Sound_DeleteSyncPoint            (FMOD_SOUND *sound, FMOD_SYNCPOINT *point);
 	return ErrNoImpl
@@ -268,11 +280,13 @@ func (s *Sound) MusicSpeed() (float64, error) {
    Userdata set/get.
 */
 
+// NOTE: Not implement yet
 func (s *Sound) SetUserData(userdata *interface{}) error {
 	//FMOD_RESULT F_API FMOD_Sound_SetUserData                (FMOD_SOUND *sound, void *userdata);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *Sound) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_Sound_GetUserData                (FMOD_SOUND *sound, void **userdata);
 	return ErrNoImpl

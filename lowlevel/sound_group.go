@@ -39,11 +39,13 @@ func (s *SoundGroup) MaxAudible() (int, error) {
 	return int(maxaudible), errs[res]
 }
 
+// NOTE: Not implement yet
 func (s *SoundGroup) SetMaxAudibleBehavior(behavior C.FMOD_SOUNDGROUP_BEHAVIOR) error {
 	//FMOD_RESULT F_API FMOD_SoundGroup_SetMaxAudibleBehavior (FMOD_SOUNDGROUP *soundgroup, FMOD_SOUNDGROUP_BEHAVIOR behavior);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *SoundGroup) MaxAudibleBehavior(behavior *C.FMOD_SOUNDGROUP_BEHAVIOR) error {
 	//FMOD_RESULT F_API FMOD_SoundGroup_GetMaxAudibleBehavior (FMOD_SOUNDGROUP *soundgroup, FMOD_SOUNDGROUP_BEHAVIOR *behavior);
 	return ErrNoImpl
@@ -80,6 +82,7 @@ func (s *SoundGroup) Stop() error {
    Information only functions.
 */
 
+// NOTE: Not implement yet
 func (s *SoundGroup) Name(name *C.char, namelen C.int) error {
 	//FMOD_RESULT F_API FMOD_SoundGroup_GetName(FMOD_SOUNDGROUP *soundgroup, char *name, int namelen);
 	return ErrNoImpl
@@ -107,11 +110,13 @@ func (s *SoundGroup) NumPlaying() (int, error) {
    Userdata set/get.
 */
 
+// NOTE: Not implement yet
 func (s *SoundGroup) SetUserData(userdata *interface{}) error {
 	//FMOD_RESULT F_API FMOD_SoundGroup_SetUserData           (FMOD_SOUNDGROUP *soundgroup, void *userdata);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (s *SoundGroup) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_SoundGroup_GetUserData           (FMOD_SOUNDGROUP *soundgroup, void **userdata);
 	return ErrNoImpl

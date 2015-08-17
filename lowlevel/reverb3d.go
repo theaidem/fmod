@@ -66,11 +66,13 @@ func (r *Reverb3D) IsActive() (bool, error) {
    Userdata set/get.
 */
 
+// NOTE: Not implement yet
 func (r *Reverb3D) SetUserData(userdata *interface{}) error {
 	//FMOD_RESULT F_API FMOD_Reverb3D_SetUserData             (FMOD_REVERB3D *reverb3d, void *userdata);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 func (r *Reverb3D) UserData(userdata **interface{}) error {
 	//FMOD_RESULT F_API FMOD_Reverb3D_GetUserData             (FMOD_REVERB3D *reverb3d, void **userdata);
 	return ErrNoImpl

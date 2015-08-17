@@ -182,6 +182,7 @@ func (s *System) DSPBufferSize() (uint32, int, error) {
 }
 
 // TODO: add more docs
+// NOTE: Not implement yet
 // Specify user callbacks for FMOD's internal file manipulation functions. This function is useful for replacing FMOD's file system with a game system's own file reading API.
 func (s *System) SetFileSystem(useropen C.FMOD_FILE_OPEN_CALLBACK, userclose C.FMOD_FILE_CLOSE_CALLBACK, userread C.FMOD_FILE_READ_CALLBACK, userseek C.FMOD_FILE_SEEK_CALLBACK, userasyncread C.FMOD_FILE_ASYNCREAD_CALLBACK, userasynccancel C.FMOD_FILE_ASYNCCANCEL_CALLBACK, blockalign C.int) error {
 	//FMOD_RESULT F_API FMOD_System_SetFileSystem             (FMOD_SYSTEM *system, FMOD_FILE_OPEN_CALLBACK useropen, FMOD_FILE_CLOSE_CALLBACK userclose, FMOD_FILE_READ_CALLBACK userread, FMOD_FILE_SEEK_CALLBACK userseek, FMOD_FILE_ASYNCREAD_CALLBACK userasyncread, FMOD_FILE_ASYNCCANCEL_CALLBACK userasynccancel, int blockalign);
@@ -189,6 +190,7 @@ func (s *System) SetFileSystem(useropen C.FMOD_FILE_OPEN_CALLBACK, userclose C.F
 }
 
 // TODO: add more docs
+// NOTE: Not implement yet
 // Function to allow a user to 'piggyback' on FMOD's file reading routines.
 // This allows users to capture data as FMOD reads it, which may be useful for ripping the raw data that FMOD reads for hard to support sources (for example internet streams).
 //
@@ -218,6 +220,7 @@ func (s *System) AdvancedSettings() (*AdvancedSettings, error) {
 }
 
 // TODO: add more docs
+// NOTE: Not implement yet
 // Sets a system callback to catch various fatal or informational events.
 func (s *System) SetCallback(callback C.FMOD_SYSTEM_CALLBACK, callbackmask C.FMOD_SYSTEM_CALLBACK_TYPE) error {
 	//FMOD_RESULT F_API FMOD_System_SetCallback               (FMOD_SYSTEM *system, FMOD_SYSTEM_CALLBACK callback, FMOD_SYSTEM_CALLBACK_TYPE callbackmask);
@@ -228,18 +231,21 @@ func (s *System) SetCallback(callback C.FMOD_SYSTEM_CALLBACK, callbackmask C.FMO
    Plug-in support.
 */
 
+// NOTE: Not implement yet
 // Specify a base search path for plugins so they can be placed somewhere else than the directory of the main executable.
 func (s *System) SetPluginPath(path *C.char) error {
 	//FMOD_RESULT F_API FMOD_System_SetPluginPath             (FMOD_SYSTEM *system, const char *path);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Loads an FMOD plugin. This could be a DSP, file format or output plugin.
 func (s *System) LoadPlugin(filename *C.char, handle *C.uint, priority C.uint) error {
 	//FMOD_RESULT F_API FMOD_System_LoadPlugin                (FMOD_SYSTEM *system, const char *filename, unsigned int *handle, unsigned int priority);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Unloads a plugin from memory.
 func (s *System) UnloadPlugin(handle C.uint) error {
 	//FMOD_RESULT F_API FMOD_System_UnloadPlugin              (FMOD_SYSTEM *system, unsigned int handle);
@@ -254,24 +260,28 @@ func (s *System) NumPlugins(plugintype PluginType) (int, error) {
 	return int(numplugins), errs[res]
 }
 
+// NOTE: Not implement yet
 //Retrieves the handle of a plugin based on its type and relative index. Use "System.NumPlugins" to enumerate plugins.
 func (s *System) PluginHandle(plugintype C.FMOD_PLUGINTYPE, index C.int, handle *C.uint) error {
 	//FMOD_RESULT F_API FMOD_System_GetPluginHandle           (FMOD_SYSTEM *system, FMOD_PLUGINTYPE plugintype, int index, unsigned int *handle);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Retrieves information to display for the selected plugin.
 func (s *System) PluginInfo(handle C.uint, plugintype *C.FMOD_PLUGINTYPE, name *C.char, version *C.int) error {
 	//FMOD_RESULT F_API FMOD_System_GetPluginInfo             (FMOD_SYSTEM *system, unsigned int handle, FMOD_PLUGINTYPE *plugintype, char *name, int namelen, unsigned int *version);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Selects an output type based on the enumerated list of outputs including FMOD and 3rd party output plugins.
 func (s *System) SetOutputByPlugin(handle C.uint) error {
 	//FMOD_RESULT F_API FMOD_System_SetOutputByPlugin         (FMOD_SYSTEM *system, unsigned int handle);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Returns the currently selected output as an id in the list of output plugins.
 // This function can be called after FMOD is already activated. You can use it to change the output mode at runtime.
 // If SYSTEM_CALLBACK_DEVICELISTCHANGED is specified use the setOutput call to change to "OUTPUTTYPE_NOSOUND" if no more sound card drivers exist.
@@ -280,6 +290,7 @@ func (s *System) OutputByPlugin(handle *C.uint) error {
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Creates a DSP unit object which is either built in or loaded as a plugin, to be inserted into a DSP network, for the purposes of sound filtering or sound generation.
 // This function creates a DSP unit that can be enumerated by using "System.NumPlugins" and "System.PluginInfo".
 //
@@ -291,18 +302,21 @@ func (s *System) CreateDSPByPlugin(handle C.uint, dsp **C.FMOD_DSP) error {
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Retrieve the description structure for a pre-existing DSP plugin.
 func (s *System) DSPInfoByPlugin(handle C.uint, description **C.FMOD_DSP_DESCRIPTION) error {
 	//FMOD_RESULT F_API FMOD_System_GetDSPInfoByPlugin        (FMOD_SYSTEM *system, unsigned int handle, const FMOD_DSP_DESCRIPTION **description);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Creates a file format codec to be used by FMOD for opening custom file types.
 func (s *System) RegisterCodec(description *C.FMOD_CODEC_DESCRIPTION, handle *C.uint, priority C.uint) error {
 	//FMOD_RESULT F_API FMOD_System_RegisterCodec             (FMOD_SYSTEM *system, FMOD_CODEC_DESCRIPTION *description, unsigned int *handle, unsigned int priority);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Register a user-defined DSP effect for use with the System.
 // This function allows you to register statically-linked DSP effects.
 // Once registered, you can create instances of the DSP effect by using System::createDSPByPlugin.
@@ -311,6 +325,7 @@ func (s *System) RegisterDSP(description *C.FMOD_DSP_DESCRIPTION, handle *C.uint
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Register a user-defined output mode for use with the System.
 // This function allows you to register statically-linked output modes.
 // Once registered, you can use the output mode with "System.SetOutputByPlugin".
@@ -533,6 +548,7 @@ func (s *System) Get3DListenerAttributes(listener int) (pos, vel, forward, up Ve
 	return
 }
 
+// NOTE: Not implement yet
 // When FMOD wants to calculate 3d volume for a channel, this callback can be used to override the internal volume calculation based on distance.
 //
 // callback: Pointer to a C function of type FMOD_3D_ROLLOFF_CALLBACK, that is used to override the FMOD volume calculation.
@@ -558,6 +574,7 @@ func (s *System) MixerResume() error {
 	return errs[res]
 }
 
+// NOTE: Not implement yet
 // Gets the default matrix used to convert from one speaker mode to another.
 // The gain for source channel 's' to target channel 't' is matrix[t * matrixhop + s].
 // If 'sourcespeakermode' or 'targetspeakermode' is SPEAKERMODE_RAW, this function will return error.
@@ -566,6 +583,7 @@ func (s *System) DefaultMixMatrix(sourcespeakermode, targetspeakermode C.FMOD_SP
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Gets the a speaker mode's channel count.
 func (s *System) SpeakerModeChannels(mode C.FMOD_SPEAKERMODE, channels *C.int) error {
 	//FMOD_RESULT F_API FMOD_System_GetSpeakerModeChannels    (FMOD_SYSTEM *system, FMOD_SPEAKERMODE mode, int *channels);
@@ -583,6 +601,7 @@ func (s *System) Version() (uint32, error) {
 	return uint32(version), errs[res]
 }
 
+// NOTE: Not implement yet
 // Retrieves a pointer to the system level output device module.
 // This means a pointer to a DirectX "LPDIRECTSOUND", or a WINMM handle, or with something like with OUTPUTTYPE_NOSOUND output, the handle will be null or 0.
 // Must be called after "System.Init".
@@ -859,6 +878,7 @@ func (s *System) MasterSoundGroup() (*SoundGroup, error) {
    Routing to ports.
 */
 
+// NOTE: Not implement yet
 // Route the signal from a channel group into a seperate audio port on the output driver.
 //
 // portType: Output driver specific audio port type
@@ -873,6 +893,7 @@ func (s *System) AttachChannelGroupToPort(portType C.FMOD_PORT_TYPE, portIndex C
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Disconnect a channel group from a and route audio back to the default port of the output driver
 func (s *System) DetachChannelGroupFromPort(channelgroup *C.FMOD_CHANNELGROUP) error {
 	//FMOD_RESULT F_API FMOD_System_DetachChannelGroupFromPort(FMOD_SYSTEM *system, FMOD_CHANNELGROUP *channelgroup);
@@ -883,6 +904,7 @@ func (s *System) DetachChannelGroupFromPort(channelgroup *C.FMOD_CHANNELGROUP) e
    Reverb API.
 */
 
+// NOTE: Not implement yet
 // Sets parameters for the global reverb environment.
 // Reverb parameters can be set manually, or automatically using the pre-defined presets given in the fmod.h header.
 func (s *System) SetReverbProperties(instance C.int, prop *C.FMOD_REVERB_PROPERTIES) error {
@@ -890,6 +912,7 @@ func (s *System) SetReverbProperties(instance C.int, prop *C.FMOD_REVERB_PROPERT
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Retrieves the current reverb environment for the specified reverb instance.
 // You must specify the 'Instance' value (usually 0 unless you are using multiple reverbs) before calling this function.
 // Note! It is important to specify the 'Instance' value in the REVERB_PROPERTIES structure correctly, otherwise you will get an FMOD_ERR_REVERB_INSTANCE error.
@@ -927,6 +950,7 @@ func (s *System) UnlockDSP() error {
    Recording API.
 */
 
+// NOTE: Not implement yet
 // Retrieves the number of recording devices available for this output mode.
 // Use this to enumerate all recording devices possible so that the user can select one.
 func (s *System) RecordNumDrivers(numdrivers, numconnected *C.int) error {
@@ -934,6 +958,7 @@ func (s *System) RecordNumDrivers(numdrivers, numconnected *C.int) error {
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // TODO: add more docs
 // Retrieves identification information about a sound device specified by its index, and specific to the output mode set with "System.SetOutput".
 func (s *System) RecordDriverInfo(id C.int, name *C.char, namelen C.int, guid *C.FMOD_GUID, systemrate *C.int, speakermode *C.FMOD_SPEAKERMODE, speakermodechannels *C.int, state *C.FMOD_DRIVER_STATE) error {
@@ -941,6 +966,7 @@ func (s *System) RecordDriverInfo(id C.int, name *C.char, namelen C.int, guid *C
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Retrieves the current recording position of the record buffer in PCM samples.
 //
 // id: Enumerated driver ID. This must be in a valid range delimited by "System.RecordNumDrivers".
@@ -949,6 +975,7 @@ func (s *System) RecordPosition(id C.int, position *C.uint) error {
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Starts the recording engine recording to the specified recording sound.
 //
 // id: Enumerated driver ID. This must be in a valid range delimited by "System.RecordNumDrivers".
@@ -962,12 +989,14 @@ func (s *System) RecordStart(id C.int, sound *C.FMOD_SOUND, loop C.FMOD_BOOL) er
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Stops the recording engine from recording to the specified recording sound.
 func (s *System) RecordStop(id C.int) error {
 	//FMOD_RESULT F_API FMOD_System_RecordStop                (FMOD_SYSTEM *system, int id);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Retrieves the state of the FMOD recording API, ie if it is currently recording or not.
 func (s *System) IsRecording(id C.int, recording *C.FMOD_BOOL) error {
 	//FMOD_RESULT F_API FMOD_System_IsRecording               (FMOD_SYSTEM *system, int id, FMOD_BOOL *recording);
@@ -1018,12 +1047,14 @@ func (s *System) GeometrySettings() (float64, error) {
 	return float64(maxworldsize), errs[res]
 }
 
+// NOTE: Not implement yet
 // Creates a geometry object from a block of memory which contains pre-saved geometry data, saved by "Geometry.Save".
 func (s *System) LoadGeometry(data *interface{}, datasize C.int, geometry **C.FMOD_GEOMETRY) error {
 	//FMOD_RESULT F_API FMOD_System_LoadGeometry              (FMOD_SYSTEM *system, const void *data, int datasize, FMOD_GEOMETRY **geometry);
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 // Calculates geometry occlusion between a listener and a sound source.
 // If single sided polygons have been created, it is important to get the source and listener positions round the right way,
 // as the occlusion from point A to point B may not be the same as the occlusion from point B to point A.
@@ -1046,6 +1077,7 @@ func (s *System) SetNetworkProxy(proxy string) error {
 	return errs[res]
 }
 
+// NOTE: Not implement yet
 // Retrieves the URL of the proxy server used in internet streaming.
 func (s *System) NetworkProxy(proxy *C.char, proxylen C.int) error {
 	//FMOD_RESULT F_API FMOD_System_GetNetworkProxy           (FMOD_SYSTEM *system, char *proxy, int proxylen);
@@ -1070,6 +1102,7 @@ func (s *System) NetworkTimeout() (int, error) {
    Userdata set/get.
 */
 
+// NOTE: Not implement yet
 // Sets a user value that the System object will store internally. Can be retrieved with "System.UserData".
 // This function is primarily used in case the user wishes to 'attach' data to an FMOD object.
 // It can be useful if an FMOD callback passes an object of this type as a parameter, and the user does not know which object it is (if many of these types of objects exist).
@@ -1079,6 +1112,7 @@ func (s *System) SetUserData(userdata interface{}) error {
 	return ErrNoImpl
 }
 
+// NOTE: Not implement yet
 //Retrieves the user value that that was set by calling the System.SetUserData function.
 func (s *System) UserData() error {
 	//FMOD_RESULT F_API FMOD_System_GetUserData               (FMOD_SYSTEM *system, void **userdata);
