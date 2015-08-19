@@ -290,7 +290,7 @@ func (c *Channel) SetMixLevelsInput(levels *C.float, numlevels C.int) error {
 // The gain for input channel 's' to output channel 't' is matrix[t * matrixhop + s].
 //
 // Levels can be below 0 to invert a signal and above 1 to amplify the signal. Note that increasing the signal level too far may cause audible distortion.
-// The matrix size will generally be the size of the number of channels in the current speaker mode. Use System::getSoftwareFormat to determine this.
+// The matrix size will generally be the size of the number of channels in the current speaker mode. Use "System.SoftwareFormat" to determine this.
 // If a matrix already exists then the matrix passed in will applied over the top of it. The input matrix can be smaller than the existing matrix.
 func (c *Channel) SetMixMatrix(matrix *C.float, outchannels, inchannels, inchannel_hop C.int) error {
 	//FMOD_RESULT F_API FMOD_Channel_SetMixMatrix(FMOD_CHANNEL *channel, float *matrix, int outchannels, int inchannels, int inchannel_hop);
@@ -303,7 +303,7 @@ func (c *Channel) SetMixMatrix(matrix *C.float, outchannels, inchannels, inchann
 // The gain for input channel 's' to output channel 't' is matrix[t * matrixhop + s].
 //
 // Levels can be below 0 to invert a signal and above 1 to amplify the signal. Note that increasing the signal level too far may cause audible distortion.
-// The matrix size will generally be the size of the number of channels in the current speaker mode. Use System::getSoftwareFormat to determine this.
+// The matrix size will generally be the size of the number of channels in the current speaker mode. Use "System.SoftwareFormat" to determine this.
 // Passing NULL for 'matrix' will allow you to query 'outchannels' and 'inchannels' without copying any data.
 func (c *Channel) MixMatrix(matrix *C.float, outchannels, inchannels *C.int, inchannel_hop C.int) error {
 	//FMOD_RESULT F_API FMOD_Channel_GetMixMatrix(FMOD_CHANNEL *channel, float *matrix, int *outchannels, int *inchannels, int inchannel_hop);
