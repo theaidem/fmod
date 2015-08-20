@@ -10,6 +10,22 @@ import (
 	"unsafe"
 )
 
+// Settings for advanced features like configuring memory and cpu usage for the "CREATECOMPRESSEDSAMPLE" feature.
+// maxMPEGCodecs / maxADPCMCodecs / maxXMACodecs will determine the maximum cpu usage of playing realtime samples.
+// Use this to lower potential excess cpu usage and also control memory usage.
+//
+// maxPCMCodecs is for use with PS3 only. It will determine the maximum number of PCM voices that can be played at once.
+// This includes streams of any format and all sounds created without the "CREATECOMPRESSEDSAMPLE" flag.
+// Memory will be allocated for codecs 'up front' (during System::init) if these values are specified as non zero.
+// If any are zero, it allocates memory for the codec whenever a file of the type in question is loaded. So if maxMPEGCodecs is 0 for example, it will allocate memory
+// for the mpeg codecs the first time an mp3 is loaded or an mp3 based .FSB file is loaded.
+//
+// Due to inefficient encoding techniques on certain .wav based ADPCM files, FMOD can can need an extra 29720 bytes per codec.
+// This means for lowest memory consumption. Use FSB as it uses an optimal/small ADPCM block size.
+//
+// Members marked with [r] mean the variable is modified by FMOD and is for reading purposes only. Do not change this value.
+// Members marked with [w] mean the variable can be written to. The user can set the value.
+// Members marked with [r/w] are either read or write depending on if you are using "System.SetAdvancedSettings" (w) or "System.AdvancedSettings" (r).
 type AdvancedSettings struct {
 	// [w]   Size of this structure.
 	// Use sizeof(FMOD_ADVANCEDSETTINGS)
