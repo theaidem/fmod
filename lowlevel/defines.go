@@ -7,6 +7,17 @@ import "C"
 
 const VERSION = C.FMOD_VERSION
 
+// These callback types are used with System::setCallback.
+//
+// Each callback has commanddata parameters passed as void* unique to the type of callback.
+// See reference to "SYSTEM_CALLBACK" to determine what they might mean for each type of callback.
+//
+// Note! Using "SYSTEM_CALLBACK_DEVICELISTCHANGED" (Windows only) will disable any automated device ejection/insertion handling by FMOD.
+// Use this callback to control the behaviour yourself.
+//
+// Note! Using "SYSTEM_CALLBACK_DEVICELISTCHANGED" (on Mac only) requires the application to be running an event loop which will allow external changes to device list to be detected by FMOD.
+//
+// Note! The 'system' object pointer will be null for "SYSTEM_CALLBACK_MEMORYALLOCATIONFAILED" callback.
 type SystemCallbackType C.FMOD_SYSTEM_CALLBACK_TYPE
 
 const (
@@ -50,9 +61,12 @@ const (
 	SYSTEM_CALLBACK_POSTUPDATE = C.FMOD_SYSTEM_CALLBACK_POSTUPDATE
 )
 
+// TODO: add more docs
+// Structure describing a globally unique identifier.
 type Guid C.FMOD_GUID
-type DSPDesc C.FMOD_DSP_DESCRIPTION
+
 type CreatesSoundExInfo C.FMOD_CREATESOUNDEXINFO
+
 type SystemCallback C.FMOD_SYSTEM_CALLBACK
 
 type InitFlags C.FMOD_INITFLAGS
