@@ -22,24 +22,24 @@ Here's the current lowlevel API status.
 
 ### Sound APIs
 
-- [ ] Standard sound manipulation functions
+- [x] Standard sound manipulation functions
 - [ ] Synchronization point APIs
-- [ ] Loop Count/Points
+- [x] Loop Count/Points
 - [ ] Funcs for MOD/S3M/XM/IT/MID sequenced formats
 - [ ] Userdata set/get
 
 ### SoundGroup APIs
 
-- [ ] Control functions
-- [ ] Information only functions
+- [x] Control functions
+- [x] Information only functions
 - [ ] Userdata set/get
 
 ### DSP APIs
 
-- [ ] Connection / disconnection / input and output
-- [ ] DSP unit control
-- [ ] DSP parameter control
-- [ ] DSP attributes
+- [x] Connection / disconnection / input and output
+- [x] DSP unit control
+- [x] DSP parameter control
+- [x] DSP attributes
 - [ ] Userdata set/get
 - [ ] Metering
 
