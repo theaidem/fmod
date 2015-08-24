@@ -11,12 +11,12 @@ Here's the current lowlevel API status.
 - [ ] Plug-in support
 - [ ] General post-init system functions
 - [ ] System information functions
-- [ ] Sound/DSP/Channel/FX creation and retrieval
+- [x] Sound/DSP/Channel/FX creation and retrieval
 - [ ] Routing to ports
-- [ ] Reverb API
-- [ ] System level DSP functionality
+- [x] Reverb API
+- [x] System level DSP functionality
 - [ ] Recording API
-- [ ] Geometry API
+- [x] Geometry API
 - [ ] Network functions
 - [ ] Userdata set/get
 
@@ -56,27 +56,27 @@ Here's the current lowlevel API status.
 
 ### Reverb3D APIs
 
-- [ ] Reverb manipulation
+- [x] Reverb manipulation
 - [ ] Userdata set/get
 
 ### General control for Channel and ChannelGroups
 
-- [ ] General control functionality
+- [x] General control functionality
 - [ ] Matrix/Panning
-- [ ] Clock based functionality
-- [ ] DSP effects
-- [ ] 3D functionality
+- [x] Clock based functionality
+- [x] DSP effects
+- [x] 3D functionality
 - [ ] Userdata set/get
 
 ### Channel APIs
 
-- [ ] Specific control functionality
-- [ ] Information only functions
+- [x] Specific control functionality
+- [x] Information only functions
 
 ### ChannelGroups APIs
 
-- [ ] Nested channel groups
-- [ ] Information only functions
+- [x] Nested channel groups
+- [x] Information only functions
 
 
 ## Studio API Status
