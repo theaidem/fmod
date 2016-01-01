@@ -1,7 +1,6 @@
 package lowlevel
 
 /*
-#cgo CFLAGS: -I ./inc
-#cgo LDFLAGS: -lfmod
+#cgo pkg-config: fmod
 */
 import "C"

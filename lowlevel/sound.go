@@ -165,10 +165,12 @@ func (s *Sound) Get3DCustomRolloff() (*Vector, int, error) {
 // index: Index within the sound to set the new sound to as a 'subsound'.
 //
 // subsound: Sound object to set as a subsound within this sound.
+/*
 func (s *Sound) SetSubSound(index int, subsound *Sound) error {
 	res := C.FMOD_Sound_SetSubSound(s.cptr, C.int(index), subsound.cptr)
 	return errs[res]
 }
+*/
 
 // Retrieves a handle to a Sound object that is contained within the parent sound.
 // If the sound is a stream and FMOD_NONBLOCKING was not used, then this call will perform a blocking seek/flush to the specified subsound.

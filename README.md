@@ -1,4 +1,10 @@
-# fmod (v10607)
+# fmod (v10704)
+
+Login and [download](http://www.fmod.org/download) MOD Studio Programmer’s API and Low Level Programmer API Linux Version 1.07.04 to ``${GOPATH}/src/github.com/theaidem/fmod`` directory
+
+```
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$GOPATH/src/github.com/theaidem/fmod/fmodstudioapi10704linux/api/lowlevel/lib/x86_64
+```
 
 ## LowLevel API Status
 

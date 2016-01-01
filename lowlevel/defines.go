@@ -583,91 +583,77 @@ const (
 type SoundType C.FMOD_SOUND_TYPE
 
 const (
-	// 3rd party / unknown plugin format.
+
+	/* 3rd party / unknown plugin format. */
 	SOUND_TYPE_UNKNOWN SoundType = C.FMOD_SOUND_TYPE_UNKNOWN
 
-	// AIFF.
+	/* AIFF. */
 	SOUND_TYPE_AIFF = C.FMOD_SOUND_TYPE_AIFF
 
-	// Microsoft Advanced Systems Format (ie WMA/ASF/WMV).
+	/* Microsoft Advanced Systems Format (ie WMA/ASF/WMV). */
 	SOUND_TYPE_ASF = C.FMOD_SOUND_TYPE_ASF
 
-	// Sony ATRAC 3 format
-	SOUND_TYPE_AT3 = C.FMOD_SOUND_TYPE_AT3
-
-	// Sound font / downloadable sound bank.
+	/* Sound font / downloadable sound bank. */
 	SOUND_TYPE_DLS = C.FMOD_SOUND_TYPE_DLS
 
-	// FLAC lossless codec.
+	/* FLAC lossless codec. */
 	SOUND_TYPE_FLAC = C.FMOD_SOUND_TYPE_FLAC
 
-	// FMOD Sample Bank.
+	/* FMOD Sample Bank. */
 	SOUND_TYPE_FSB = C.FMOD_SOUND_TYPE_FSB
 
-	// Nintendo GameCube/Wii ADPCM
-	SOUND_TYPE_GCADPCM = C.FMOD_SOUND_TYPE_GCADPCM
-
-	// Impulse Tracker.
+	/* Impulse Tracker. */
 	SOUND_TYPE_IT = C.FMOD_SOUND_TYPE_IT
 
-	// MIDI. extracodecdata is a pointer to an FMOD_MIDI_EXTRACODECDATA structure.
+	/* MIDI. */
 	SOUND_TYPE_MIDI = C.FMOD_SOUND_TYPE_MIDI
 
-	// Protracker / Fasttracker MOD.
+	/* Protracker / Fasttracker MOD. */
 	SOUND_TYPE_MOD = C.FMOD_SOUND_TYPE_MOD
 
-	// MP2/MP3 MPEG.
+	/* MP2/MP3 MPEG. */
 	SOUND_TYPE_MPEG = C.FMOD_SOUND_TYPE_MPEG
 
-	// Ogg vorbis.
+	/* Ogg vorbis. */
 	SOUND_TYPE_OGGVORBIS = C.FMOD_SOUND_TYPE_OGGVORBIS
 
-	// Information only from ASX/PLS/M3U/WAX playlists
+	/* Information only from ASX/PLS/M3U/WAX playlists */
 	SOUND_TYPE_PLAYLIST = C.FMOD_SOUND_TYPE_PLAYLIST
 
-	// Raw PCM data.
+	/* Raw PCM data. */
 	SOUND_TYPE_RAW = C.FMOD_SOUND_TYPE_RAW
 
-	// ScreamTracker 3.
+	/* ScreamTracker 3. */
 	SOUND_TYPE_S3M = C.FMOD_SOUND_TYPE_S3M
 
-	// User created sound.
+	/* User created sound. */
 	SOUND_TYPE_USER = C.FMOD_SOUND_TYPE_USER
 
-	// Microsoft WAV.
+	/* Microsoft WAV. */
 	SOUND_TYPE_WAV = C.FMOD_SOUND_TYPE_WAV
 
-	// FastTracker 2 XM.
+	/* FastTracker 2 XM. */
 	SOUND_TYPE_XM = C.FMOD_SOUND_TYPE_XM
 
-	// Xbox360 XMA
+	/* Xbox360 XMA */
 	SOUND_TYPE_XMA = C.FMOD_SOUND_TYPE_XMA
 
-	// PlayStation Portable ADPCM VAG format.
-	SOUND_TYPE_VAG = C.FMOD_SOUND_TYPE_VAG
-
-	// iPhone hardware decoder, supports AAC, ALAC and MP3. extracodecdata is a pointer to an FMOD_AUDIOQUEUE_EXTRACODECDATA structure.
+	/* iPhone hardware decoder, supports AAC, ALAC and MP3. */
 	SOUND_TYPE_AUDIOQUEUE = C.FMOD_SOUND_TYPE_AUDIOQUEUE
 
-	// Xbox360 XWMA
-	SOUND_TYPE_XWMA = C.FMOD_SOUND_TYPE_XWMA
-
-	// 3DS BCWAV container format for DSP ADPCM and PCM
-	SOUND_TYPE_BCWAV = C.FMOD_SOUND_TYPE_BCWAV
-
-	// PS4 / PSVita ATRAC 9 format
+	/* PS4 / PSVita ATRAC 9 format */
 	SOUND_TYPE_AT9 = C.FMOD_SOUND_TYPE_AT9
 
-	// Vorbis
+	/* Vorbis */
 	SOUND_TYPE_VORBIS = C.FMOD_SOUND_TYPE_VORBIS
 
-	// Windows Store Application built in system codecs
+	/*Windows Store Application built in system codecs */
 	SOUND_TYPE_MEDIA_FOUNDATION = C.FMOD_SOUND_TYPE_MEDIA_FOUNDATION
 
-	// Android MediaCodec
+	/* Android MediaCodec */
 	SOUND_TYPE_MEDIACODEC = C.FMOD_SOUND_TYPE_MEDIACODEC
 
-	// FMOD Adaptive Differential Pulse Code Modulation
+	/* FMOD Adaptive Differential Pulse Code Modulation */
 	SOUND_TYPE_FADPCM = C.FMOD_SOUND_TYPE_FADPCM
 
 	// Maximum number of sound types supported.
@@ -681,56 +667,26 @@ type SoundFormat C.FMOD_SOUND_FORMAT
 
 const (
 
-	// Unitialized / unknown.
+	/* Unitialized / unknown. */
 	SOUND_FORMAT_NONE SoundFormat = C.FMOD_SOUND_FORMAT_NONE
 
-	// 8bit integer PCM data.
+	/* 8bit integer PCM data. */
 	SOUND_FORMAT_PCM8 = C.FMOD_SOUND_FORMAT_PCM8
 
-	// 16bit integer PCM data.
+	/* 16bit integer PCM data. */
 	SOUND_FORMAT_PCM16 = C.FMOD_SOUND_FORMAT_PCM16
 
-	// 24bit integer PCM data.
+	/* 24bit integer PCM data. */
 	SOUND_FORMAT_PCM24 = C.FMOD_SOUND_FORMAT_PCM24
 
-	// 32bit integer PCM data.
+	/* 32bit integer PCM data. */
 	SOUND_FORMAT_PCM32 = C.FMOD_SOUND_FORMAT_PCM32
 
-	// 32bit floating point PCM data.
+	/* 32bit floating point PCM data. */
 	SOUND_FORMAT_PCMFLOAT = C.FMOD_SOUND_FORMAT_PCMFLOAT
 
-	// Compressed Nintendo 3DS/Wii DSP data.
-	SOUND_FORMAT_GCADPCM = C.FMOD_SOUND_FORMAT_GCADPCM
-
-	// Compressed IMA ADPCM data.
-	SOUND_FORMAT_IMAADPCM = C.FMOD_SOUND_FORMAT_IMAADPCM
-
-	// Compressed PlayStation Portable ADPCM data.
-	SOUND_FORMAT_VAG = C.FMOD_SOUND_FORMAT_VAG
-
-	// Compressed PSVita ADPCM data.
-	SOUND_FORMAT_HEVAG = C.FMOD_SOUND_FORMAT_HEVAG
-
-	// Compressed Xbox360 XMA data.
-	SOUND_FORMAT_XMA = C.FMOD_SOUND_FORMAT_XMA
-
-	// Compressed MPEG layer 2 or 3 data.
-	SOUND_FORMAT_MPEG = C.FMOD_SOUND_FORMAT_MPEG
-
-	// Not supported.
-	SOUND_FORMAT_CELT = C.FMOD_SOUND_FORMAT_CELT
-
-	// Compressed PSVita ATRAC9 data.
-	SOUND_FORMAT_AT9 = C.FMOD_SOUND_FORMAT_AT9
-
-	// Compressed Xbox360 xWMA data.
-	SOUND_FORMAT_XWMA = C.FMOD_SOUND_FORMAT_XWMA
-
-	// Compressed Vorbis data.
-	SOUND_FORMAT_VORBIS = C.FMOD_SOUND_FORMAT_VORBIS
-
-	// Compressed FADPCM data.
-	SOUND_FORMAT_FADPCM = C.FMOD_SOUND_FORMAT_FADPCM
+	/* Sound data is in its native compressed format. */
+	SOUND_FORMAT_BITSTREAM = C.FMOD_SOUND_FORMAT_BITSTREAM
 
 	// Maximum number of sound formats supported.
 	SOUND_FORMAT_MAX = C.FMOD_SOUND_FORMAT_MAX
