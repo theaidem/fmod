@@ -10,6 +10,10 @@ import (
 	"unsafe"
 )
 
+func init() {
+	runtime.LockOSThread()
+}
+
 // The main object for the FMOD Low Level System.
 // When using FMOD Studio, this system object will be automatically instantiated as part of `StudioSystem.Initialize()`.
 type System struct {
@@ -700,8 +704,8 @@ func (s *System) CreateStream(name_or_data string, mode Mode, exinfo *CreatesSou
 // To be active, a unit must be inserted into the FMOD DSP network to be heard.
 // Use functions such as "ChannelGroup.AddDSP", "Channel.AddDSP" or "DSP.AddInput" to do this.
 func (s *System) CreateDSP(description *DSPDesc) (*DSP, error) {
-	// TODO Finalizer
 	var dsp DSP
+	defer runtime.SetFinalizer(&dsp, (*DSP).Release)
 	res := C.FMOD_System_CreateDSP(s.cptr, (*C.FMOD_DSP_DESCRIPTION)(description), &dsp.cptr)
 	return &dsp, errs[res]
 }
@@ -777,6 +781,7 @@ func (s *System) CreateSoundGroup(name string) (*SoundGroup, error) {
 func (s *System) CreateReverb3D() (*Reverb3D, error) {
 	// TODO Finalizer
 	var reverb3d Reverb3D
+	defer runtime.SetFinalizer(&reverb3d, (*Reverb3D).Release)
 	res := C.FMOD_System_CreateReverb3D(s.cptr, &reverb3d.cptr)
 	return &reverb3d, errs[res]
 }
@@ -1024,8 +1029,8 @@ func (s *System) IsRecording(id C.int, recording *C.FMOD_BOOL) error {
 // Objects or polygons outside the range of maxworldsize will not be handled efficiently.
 // Conversely, if maxworldsize is excessively large, the structure may lose precision and efficiency may drop.
 func (s *System) CreateGeometry(maxpolygons, maxvertices int) (Geometry, error) {
-	// TODO: add Finalizer
 	var geom Geometry
+	defer runtime.SetFinalizer(&geom, (*Geometry).Release)
 	res := C.FMOD_System_CreateGeometry(s.cptr, C.int(maxpolygons), C.int(maxvertices), &geom.cptr)
 	return geom, errs[res]
 }

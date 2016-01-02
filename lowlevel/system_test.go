@@ -5,47 +5,57 @@ import (
 	"time"
 )
 
-var system *System
+//var system *System
 
-func NewSystem() (chan bool, error) {
-	var err error
+func NewSystem(duration time.Duration) (*System, chan bool, error) {
+	//var err error
 	done := make(chan bool)
 
-	system, err = SystemCreate()
+	system, err := SystemCreate()
 	if err != nil {
-		return done, err
+		return nil, done, err
 	}
 
 	err = system.SetOutput(OUTPUTTYPE_AUTODETECT)
 	if err != nil {
-		return done, err
+		return nil, done, err
 	}
 
 	//Init the System object
 	err = system.Init(10, INIT_NORMAL, 0)
 	if err != nil {
-		return done, err
+		return nil, done, err
 	}
 
 	go func() {
+
+		defer func() {
+			// Manualy Release System
+			err := system.Release()
+			if err != nil {
+				panic(err)
+			}
+		}()
+
 		for {
 			select {
-			case <-done:
+			case <-time.After(duration):
+				done <- true
 				return
-			default:
-				err := system.Update()
-				if err != nil {
-					panic(err)
-				}
+			}
+
+			err := system.Update()
+			if err != nil {
+				panic(err)
 			}
 		}
 	}()
 
-	return done, nil
+	return system, done, nil
 }
 
 func TestSystemInstance(t *testing.T) {
-	done, err := NewSystem()
+	system, done, err := NewSystem(0)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -69,26 +79,21 @@ func TestSystemInstance(t *testing.T) {
 		t.Error("expected ", 0, " but got", v)
 	}
 
-	cpu, err := system.CPUUsage()
+	_, err = system.CPUUsage()
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	t.Logf("%#v\n", cpu)
-
-	ram, err := system.SoundRAM()
+	_, err = system.SoundRAM()
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	t.Logf("%#v\n", ram)
-
-	done <- true
+	<-done
 }
 
 func TestSystemSetup(t *testing.T) {
-
-	done, err := NewSystem()
+	system, done, err := NewSystem(0)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -157,12 +162,12 @@ func TestSystemSetup(t *testing.T) {
 	t.Logf("%#v\n", bufferlength)
 	t.Logf("%#v\n", numbuffers)
 
-	done <- true
+	<-done
 }
 
 func TestSystemPlugins(t *testing.T) {
 
-	done, err := NewSystem()
+	system, done, err := NewSystem(0)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -186,12 +191,11 @@ func TestSystemPlugins(t *testing.T) {
 	t.Logf("DSP: %#v\n", dspplugins)
 	t.Logf("Output: %#v\n", outplugins)
 
-	done <- true
+	<-done
 }
 
 func TestSystemPostInit(t *testing.T) {
-
-	done, err := NewSystem()
+	system, done, err := NewSystem(0)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -226,34 +230,31 @@ func TestSystemPostInit(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	done <- true
+	<-done
 }
 
-func TestSystemCreation(t *testing.T) {
+func TestSystemCreateSound(t *testing.T) {
 
-	done, err := NewSystem()
+	system, done, err := NewSystem(600 * time.Millisecond)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	var exinfo *CreatesSoundExInfo
-	bell, err := system.CreateSound("./media/bell.mp3", MODE_DEFAULT, exinfo)
+	bell, err := system.CreateSound("./media/bell.mp3", MODE_DEFAULT, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	guiro, err := system.CreateSound("./media/guiro.mp3", MODE_DEFAULT, exinfo)
+	lms, err := bell.Length(TIMEUNIT_MS)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	var channelgroup *ChannelGroup
-	_, err = system.PlaySound(bell, channelgroup, true)
-	if err != nil {
-		t.Fatal(err)
+	if lms != 576 {
+		t.Error("expected 576 but got", lms)
 	}
 
-	_, err = system.PlaySound(guiro, channelgroup, false)
+	_, err = system.PlaySound(bell, nil, false)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -263,54 +264,137 @@ func TestSystemCreation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	t.Log(playing)
+	if playing != 1 {
+		t.Error("expected 1 but got", playing)
+	}
 
-	time.Sleep(100 * time.Millisecond)
+	<-done
+}
 
-	err = system.SetSpeakerPosition(SPEAKER_FRONT_LEFT, 36.5, 10, false)
+func TestSystemCreateStream(t *testing.T) {
+
+	system, done, err := NewSystem(600 * time.Millisecond)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	err = system.SetSpeakerPosition(SPEAKER_FRONT_RIGHT, 36.5, 10, false)
+	bell, err := system.CreateStream("./media/bell.mp3", MODE_CREATESTREAM, nil)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	x, y, active, err := system.SpeakerPosition(SPEAKER_FRONT_LEFT)
+	lms, err := bell.Length(TIMEUNIT_MS)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	t.Logf("SPEAKER_FRONT_LEFT Active: %#v\n", active)
-	t.Logf("SPEAKER_FRONT_LEFT X: %#v\n", x)
-	t.Logf("SPEAKER_FRONT_LEFT Y: %#v\n", y)
-	t.Log("")
+	if lms != 576 {
+		t.Error("expected 576 but got", lms)
+	}
 
-	x, y, active, err = system.SpeakerPosition(SPEAKER_FRONT_RIGHT)
+	_, err = system.PlaySound(bell, nil, false)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	t.Logf("SPEAKER_FRONT_RIGHT Active: %#v\n", active)
-	t.Logf("SPEAKER_FRONT_RIGHT X: %#v\n", x)
-	t.Logf("SPEAKER_FRONT_RIGHT Y: %#v\n", y)
-	t.Log("")
-
-	dopplerscale, distancefactor, rolloffscale, err := system.Get3DSettings()
+	playing, err := system.ChannelsPlaying()
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	t.Logf("dopplerscale: %#v\n", dopplerscale)
-	t.Logf("distancefactor: %#v\n", distancefactor)
-	t.Logf("rolloffscale: %#v\n", rolloffscale)
+	if playing != 1 {
+		t.Error("expected 1 but got", playing)
+	}
 
-	_, err = system.PlaySound(guiro, channelgroup, false)
+	<-done
+}
+
+func TestSystemCreateChannelGroup(t *testing.T) {
+
+	system, done, err := NewSystem(0)
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	time.Sleep(1000 * time.Millisecond)
-	done <- true
+	_, err = system.CreateChannelGroup("TestChannelGroup")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	<-done
+}
+
+func TestSystemCreateSoundGroup(t *testing.T) {
+
+	system, done, err := NewSystem(0)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	_, err = system.CreateSoundGroup("TestSoundGroup")
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	<-done
+}
+
+func TestSystemCreateReverb3D(t *testing.T) {
+
+	system, done, err := NewSystem(0)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	_, err = system.CreateReverb3D()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	<-done
+}
+
+func TestSystemCreateGeometry(t *testing.T) {
+
+	system, done, err := NewSystem(0)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	_, err = system.CreateGeometry(1, 1)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	<-done
+}
+
+func TestSystemMasterChannelGroup(t *testing.T) {
+
+	system, done, err := NewSystem(0)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	_, err = system.MasterChannelGroup()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	<-done
+}
+
+func TestSystemMasterSoundGroup(t *testing.T) {
+
+	system, done, err := NewSystem(0)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	_, err = system.MasterSoundGroup()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	<-done
 }
