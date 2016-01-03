@@ -163,11 +163,11 @@ type AdvancedSettings struct {
 	RandomSeed uint32
 }
 
-func NewAdvancedSettings() AdvancedSettings {
+func NewAdvancedSettings() *AdvancedSettings {
 	s := AdvancedSettings{}
 	var csettings C.FMOD_ADVANCEDSETTINGS
 	s.CbSize = int(unsafe.Sizeof(csettings))
-	return s
+	return &s
 }
 
 func (a *AdvancedSettings) fromC(as C.FMOD_ADVANCEDSETTINGS) {

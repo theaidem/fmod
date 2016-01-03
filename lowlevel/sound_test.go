@@ -385,3 +385,33 @@ func TestSoundLoopPoints(t *testing.T) {
 
 	<-done
 }
+
+func TestSoundUserData(t *testing.T) {
+
+	system, done, err := NewSystem(0)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	censor, err := system.CreateSound("media/censor.wav", MODE_LOOP_NORMAL, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	userData := "TestData"
+	err = censor.SetUserData(userData)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	data, err := censor.UserData()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if data != userData {
+		t.Error("Data is different")
+	}
+
+	<-done
+}

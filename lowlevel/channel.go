@@ -4,6 +4,7 @@ package lowlevel
 #include <fmod.h>
 */
 import "C"
+import "unsafe"
 
 type Channel struct {
 	cptr *C.FMOD_CHANNEL
@@ -711,18 +712,18 @@ func (c *Channel) Get3DDistanceFilter() (bool, float64, float64, error) {
    Userdata set/get.
 */
 
-// NOTE: Not implement yet
 // Sets a user value that can be retrieved with "Channel.UserData".
-func (c *Channel) SetUserData(userdata *interface{}) error {
-	//FMOD_RESULT F_API FMOD_Channel_SetUserData              (FMOD_CHANNEL *channel, void *userdata);
-	return ErrNoImpl
+func (c *Channel) SetUserData(userdata interface{}) error {
+	res := C.FMOD_Channel_SetUserData(c.cptr, unsafe.Pointer(&userdata))
+	return errs[res]
 }
 
-// NOTE: Not implement yet
 // Retrieves a user value that can be set with "Channel.SetUserData".
-func (c *Channel) UserData(userdata **interface{}) error {
-	//FMOD_RESULT F_API FMOD_Channel_GetUserData              (FMOD_CHANNEL *channel, void **userdata);
-	return ErrNoImpl
+func (c *Channel) UserData() (interface{}, error) {
+	var userdata *interface{}
+	cUserdata := unsafe.Pointer(userdata)
+	res := C.FMOD_Channel_GetUserData(c.cptr, &cUserdata)
+	return *(*interface{})(cUserdata), errs[res]
 }
 
 /*

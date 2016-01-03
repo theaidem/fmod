@@ -4,6 +4,7 @@ package lowlevel
 #include <fmod.h>
 */
 import "C"
+import "unsafe"
 
 type Sound struct {
 	cptr *C.FMOD_SOUND
@@ -510,19 +511,19 @@ func (s *Sound) MusicSpeed() (float64, error) {
    Userdata set/get.
 */
 
-// NOTE: Not implement yet
 // Sets a user value that the Sound object will store internally. Can be retrieved with "Sound.UserData".
 // This function is primarily used in case the user wishes to 'attach' data to an FMOD object.
 // It can be useful if an FMOD callback passes an object of this type as a parameter, and the user does not know which object it is
 // (if many of these types of objects exist). Using "Sound.UserData" would help in the identification of the object.
-func (s *Sound) SetUserData(userdata *interface{}) error {
-	//FMOD_RESULT F_API FMOD_Sound_SetUserData                (FMOD_SOUND *sound, void *userdata);
-	return ErrNoImpl
+func (s *Sound) SetUserData(userdata interface{}) error {
+	res := C.FMOD_Sound_SetUserData(s.cptr, unsafe.Pointer(&userdata))
+	return errs[res]
 }
 
-// NOTE: Not implement yet
 // Retrieves the user value that that was set by calling the "Sound.SetUserData" function.
-func (s *Sound) UserData(userdata **interface{}) error {
-	//FMOD_RESULT F_API FMOD_Sound_GetUserData                (FMOD_SOUND *sound, void **userdata);
-	return ErrNoImpl
+func (s *Sound) UserData() (interface{}, error) {
+	var userdata *interface{}
+	cUserdata := unsafe.Pointer(userdata)
+	res := C.FMOD_Sound_GetUserData(s.cptr, &cUserdata)
+	return *(*interface{})(cUserdata), errs[res]
 }

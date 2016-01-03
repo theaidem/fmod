@@ -4,6 +4,7 @@ package lowlevel
 #include <fmod.h>
 */
 import "C"
+import "unsafe"
 
 type DspConnection struct {
 	cptr *C.FMOD_DSPCONNECTION
@@ -88,17 +89,17 @@ func (d *DspConnection) Type() (DSPConnectionType, error) {
    Userdata set/get.
 */
 
-// NOTE: Not implement yet
 // Sets a user value that the DSPConnection object will store internally. Can be retrieved with "DSPConnection.UserData".
 // This function is primarily used in case the user wishes to 'attach' data to an FMOD object.
-func (d *DspConnection) SetUserData(userdata *interface{}) error {
-	//FMOD_RESULT F_API FMOD_DSPConnection_SetUserData        (FMOD_DSPCONNECTION *dspconnection, void *userdata);
-	return ErrNoImpl
+func (d *DspConnection) SetUserData(userdata interface{}) error {
+	res := C.FMOD_DSPConnection_SetUserData(d.cptr, unsafe.Pointer(&userdata))
+	return errs[res]
 }
 
-// NOTE: Not implement yet
 //Retrieves the user value that that was set by calling the  DSPConnection.SetUserData.
-func (d *DspConnection) UserData(userdata **interface{}) error {
-	//FMOD_RESULT F_API FMOD_DSPConnection_GetUserData        (FMOD_DSPCONNECTION *dspconnection, void **userdata);
-	return ErrNoImpl
+func (d *DspConnection) UserData() (interface{}, error) {
+	var userdata *interface{}
+	cUserdata := unsafe.Pointer(userdata)
+	res := C.FMOD_DSPConnection_GetUserData(d.cptr, &cUserdata)
+	return *(*interface{})(cUserdata), errs[res]
 }

@@ -1,12 +1,18 @@
 package lowlevel
 
 /*
+#include <stdlib.h>
 #include <fmod.h>
 */
 import "C"
+import (
+	"errors"
+	"unsafe"
+)
 
 type SoundGroup struct {
 	cptr *C.FMOD_SOUNDGROUP
+	name string
 }
 
 /*
@@ -69,7 +75,8 @@ func (s *SoundGroup) MaxAudibleBehavior(behavior *C.FMOD_SOUNDGROUP_BEHAVIOR) er
 //
 // speed: Fade time in seconds (1.0 = 1 second). Default = 0.0. (no fade).
 //
-// When more sounds are playing in a SoundGroup than are specified with "SoundGroup.SetMaxAudible", the least important sound (ie lowest priority / lowest audible volume due to 3d position, volume etc)
+// When more sounds are playing in a SoundGroup than are specified with "SoundGroup.SetMaxAudible", the least important sound
+// (ie lowest priority / lowest audible volume due to 3d position, volume etc)
 // will fade to silence if FMOD_SOUNDGROUP_BEHAVIOR_MUTE is used, and any previous sounds that were silent because of this rule will fade in if they are more important.
 //
 // If a mode besides FMOD_SOUNDGROUP_BEHAVIOR_MUTE is used, the fade speed is ignored.
@@ -111,11 +118,16 @@ func (s *SoundGroup) Stop() error {
    Information only functions.
 */
 
-// NOTE: Not implement yet
 // Retrieves the name of the sound group.
-func (s *SoundGroup) Name(name *C.char, namelen C.int) error {
-	//FMOD_RESULT F_API FMOD_SoundGroup_GetName(FMOD_SOUNDGROUP *soundgroup, char *name, int namelen);
-	return ErrNoImpl
+func (s *SoundGroup) Name() (string, error) {
+	nlen := C.int(len(s.name) + 1)
+	var cname *C.char = C.CString(`\0`)
+	defer C.free(unsafe.Pointer(cname))
+	res := C.FMOD_SoundGroup_GetName(s.cptr, cname, nlen)
+	if C.GoString(cname) != s.name {
+		return s.name, errors.New("Wrong names")
+	}
+	return C.GoString(cname), errs[res]
 }
 
 // Retrieves the current number of sounds in this sound group.
@@ -148,20 +160,20 @@ func (s *SoundGroup) NumPlaying() (int, error) {
    Userdata set/get.
 */
 
-// NOTE: Not implement yet
 // Sets a user value that the SoundGroup object will store internally. Can be retrieved with "SoundGroup.UserData".
 //
 // This function is primarily used in case the user wishes to 'attach' data to an FMOD object.
 // It can be useful if an FMOD callback passes an object of this type as a parameter, and the user does not know which object it is (if many of these types of objects exist).
 // Using "SoundGroup.UserData" would help in the identification of the object.
-func (s *SoundGroup) SetUserData(userdata *interface{}) error {
-	//FMOD_RESULT F_API FMOD_SoundGroup_SetUserData           (FMOD_SOUNDGROUP *soundgroup, void *userdata);
-	return ErrNoImpl
+func (s *SoundGroup) SetUserData(userdata interface{}) error {
+	res := C.FMOD_SoundGroup_SetUserData(s.cptr, unsafe.Pointer(&userdata))
+	return errs[res]
 }
 
-// NOTE: Not implement yet
 // Retrieves the user value that that was set by calling the "SoundGroup.SetUserData" function.
-func (s *SoundGroup) UserData(userdata **interface{}) error {
-	//FMOD_RESULT F_API FMOD_SoundGroup_GetUserData           (FMOD_SOUNDGROUP *soundgroup, void **userdata);
-	return ErrNoImpl
+func (s *SoundGroup) UserData() (interface{}, error) {
+	var userdata *interface{}
+	cUserdata := unsafe.Pointer(userdata)
+	res := C.FMOD_SoundGroup_GetUserData(s.cptr, &cUserdata)
+	return *(*interface{})(cUserdata), errs[res]
 }

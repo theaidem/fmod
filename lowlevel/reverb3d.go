@@ -4,6 +4,7 @@ package lowlevel
 #include <fmod.h>
 */
 import "C"
+import "unsafe"
 
 type Reverb3D struct {
 	cptr *C.FMOD_REVERB3D
@@ -97,20 +98,20 @@ func (r *Reverb3D) IsActive() (bool, error) {
    Userdata set/get.
 */
 
-// NOTE: Not implement yet
 // Sets a user value that the Reverb object will store internally. Can be retrieved with "Reverb.UserData".
 // This function is primarily used in case the user wishes to 'attach' data to an FMOD object.
 //
 // It can be useful if an FMOD callback passes an object of this type as a parameter,
 // and the user does not know which object it is (if many of these types of objects exist). Using Reverb::getUserData would help in the identification of the object.
-func (r *Reverb3D) SetUserData(userdata *interface{}) error {
-	//FMOD_RESULT F_API FMOD_Reverb3D_SetUserData             (FMOD_REVERB3D *reverb3d, void *userdata);
-	return ErrNoImpl
+func (r *Reverb3D) SetUserData(userdata interface{}) error {
+	res := C.FMOD_Reverb3D_SetUserData(r.cptr, unsafe.Pointer(&userdata))
+	return errs[res]
 }
 
-// NOTE: Not implement yet
 // Retrieves the user value that that was set by calling the "Reverb.SetUserData" function.
-func (r *Reverb3D) UserData(userdata **interface{}) error {
-	//FMOD_RESULT F_API FMOD_Reverb3D_GetUserData             (FMOD_REVERB3D *reverb3d, void **userdata);
-	return ErrNoImpl
+func (r *Reverb3D) UserData() (interface{}, error) {
+	var userdata *interface{}
+	cUserdata := unsafe.Pointer(userdata)
+	res := C.FMOD_Reverb3D_GetUserData(r.cptr, &cUserdata)
+	return *(*interface{})(cUserdata), errs[res]
 }

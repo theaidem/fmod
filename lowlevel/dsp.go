@@ -4,6 +4,7 @@ package lowlevel
 #include <fmod.h>
 */
 import "C"
+import "unsafe"
 
 type DSP struct {
 	cptr *C.FMOD_DSP
@@ -422,23 +423,23 @@ func (d *DSP) Idle() (bool, error) {
    Userdata set/get.
 */
 
-// NOTE: Not implement yet
 // Sets a user value that the DSP object will store internally. Can be retrieved with "DSP.UserData".
 //
 // This function is primarily used in case the user wishes to 'attach' data to an FMOD object.
 //
 // It can be useful if an FMOD callback passes an object of this type as a parameter, and the user does not know which object it is (if many of these types of objects exist).
 // Using "DSP.UserData" would help in the identification of the object.
-func (d *DSP) SetUserData(userdata *interface{}) error {
-	//FMOD_RESULT F_API FMOD_DSP_SetUserData(FMOD_DSP *dsp, void *userdata);
-	return ErrNoImpl
+func (d *DSP) SetUserData(userdata interface{}) error {
+	res := C.FMOD_DSP_SetUserData(d.cptr, unsafe.Pointer(&userdata))
+	return errs[res]
 }
 
-// NOTE: Not implement yet
 // Retrieves the user value that that was set by calling the "DSP.SetUserData" function.
-func (d *DSP) UserData(userdata **interface{}) error {
-	//FMOD_RESULT F_API FMOD_DSP_GetUserData(FMOD_DSP *dsp, void **userdata);
-	return ErrNoImpl
+func (d *DSP) UserData() (interface{}, error) {
+	var userdata *interface{}
+	cUserdata := unsafe.Pointer(userdata)
+	res := C.FMOD_DSP_GetUserData(d.cptr, &cUserdata)
+	return *(*interface{})(cUserdata), errs[res]
 }
 
 /*

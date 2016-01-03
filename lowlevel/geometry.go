@@ -4,6 +4,7 @@ package lowlevel
 #include <fmod.h>
 */
 import "C"
+import "unsafe"
 
 type Geometry struct {
 	cptr *C.FMOD_GEOMETRY
@@ -142,14 +143,15 @@ func (g *Geometry) Save(data *interface{}, datasize *C.int) error {
    Userdata set/get.
 */
 
-// NOTE: Not implement yet
-func (g *Geometry) SetUserData(userdata *interface{}) error {
-	//FMOD_RESULT F_API FMOD_Geometry_SetUserData(FMOD_GEOMETRY *geometry, void *userdata);
-	return ErrNoImpl
+func (g *Geometry) SetUserData(userdata interface{}) error {
+	res := C.FMOD_Geometry_SetUserData(g.cptr, unsafe.Pointer(&userdata))
+	return errs[res]
 }
 
-// NOTE: Not implement yet
-func (g *Geometry) UserData(userdata **interface{}) error {
-	//FMOD_RESULT F_API FMOD_Geometry_GetUserData(FMOD_GEOMETRY *geometry, void **userdata);
-	return ErrNoImpl
+// Retrieves the user value that that was set by calling the "Geometry.SetUserData" function.
+func (g *Geometry) UserData() (interface{}, error) {
+	var userdata *interface{}
+	cUserdata := unsafe.Pointer(userdata)
+	res := C.FMOD_Geometry_GetUserData(g.cptr, &cUserdata)
+	return *(*interface{})(cUserdata), errs[res]
 }

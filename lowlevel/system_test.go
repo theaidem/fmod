@@ -398,3 +398,61 @@ func TestSystemMasterSoundGroup(t *testing.T) {
 
 	<-done
 }
+
+func TestSystemUserData(t *testing.T) {
+
+	system, done, err := NewSystem(0)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	userData := "TestData"
+	err = system.SetUserData(userData)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	data, err := system.UserData()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if data != userData {
+		t.Error("Data is different")
+	}
+
+	<-done
+}
+
+func TestSystemAdvancedSettings(t *testing.T) {
+	system, done, err := NewSystem(0)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	setSettings := NewAdvancedSettings()
+	setSettings.RandomSeed = 1000
+	setSettings.ReSamplerMethod = DSP_RESAMPLER_SPLINE
+	err = system.SetAdvancedSettings(setSettings)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	getSettings, err := system.AdvancedSettings()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	t.Logf("%v\n", setSettings)
+	t.Logf("%v\n", getSettings)
+
+	if setSettings.RandomSeed != getSettings.RandomSeed {
+		t.Fatal("Some Settings arent equals")
+	}
+
+	if setSettings.ReSamplerMethod != getSettings.ReSamplerMethod {
+		t.Fatal("Some Settings arent equals")
+	}
+
+	<-done
+}

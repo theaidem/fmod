@@ -10,10 +10,6 @@ import (
 	"unsafe"
 )
 
-func init() {
-	runtime.LockOSThread()
-}
-
 // The main object for the FMOD Low Level System.
 // When using FMOD Studio, this system object will be automatically instantiated as part of `StudioSystem.Initialize()`.
 type System struct {
@@ -734,11 +730,11 @@ func (s *System) CreateDSPByType(typ DSPType) (*DSP, error) {
 // The channel group can for example be used to have 2 seperate groups of master volume, instead of one global master volume.
 // A channel group can be used for sub-mixing, ie so that a set of channels can be mixed into a channel group, then can have effects applied to it without affecting other channels.
 func (s *System) CreateChannelGroup(name string) (*ChannelGroup, error) {
-	// TODO Finalizer
 	var channelgroup ChannelGroup
 	cname := C.CString(name)
 	defer C.free(unsafe.Pointer(cname))
 	res := C.FMOD_System_CreateChannelGroup(s.cptr, cname, &channelgroup.cptr)
+	defer runtime.SetFinalizer(&channelgroup, (*ChannelGroup).Release)
 	return &channelgroup, errs[res]
 }
 
@@ -748,11 +744,11 @@ func (s *System) CreateChannelGroup(name string) (*ChannelGroup, error) {
 //
 // Once a SoundGroup is created, "Sound.SetSoundGroup" is used to put a sound in a SoundGroup.
 func (s *System) CreateSoundGroup(name string) (*SoundGroup, error) {
-	// TODO Finalizer
-	var soundgroup SoundGroup
+	var soundgroup = SoundGroup{name: name}
 	cname := C.CString(name)
 	defer C.free(unsafe.Pointer(cname))
 	res := C.FMOD_System_CreateSoundGroup(s.cptr, cname, &soundgroup.cptr)
+	defer runtime.SetFinalizer(&soundgroup, (*SoundGroup).Release)
 	return &soundgroup, errs[res]
 }
 
@@ -1107,19 +1103,19 @@ func (s *System) NetworkTimeout() (int, error) {
    Userdata set/get.
 */
 
-// NOTE: Not implement yet
 // Sets a user value that the System object will store internally. Can be retrieved with "System.UserData".
 // This function is primarily used in case the user wishes to 'attach' data to an FMOD object.
 // It can be useful if an FMOD callback passes an object of this type as a parameter, and the user does not know which object it is (if many of these types of objects exist).
 // Using "System.UserData" would help in the identification of the object.
 func (s *System) SetUserData(userdata interface{}) error {
-	//FMOD_RESULT F_API FMOD_System_SetUserData               (FMOD_SYSTEM *system, void *userdata);
-	return ErrNoImpl
+	res := C.FMOD_System_SetUserData(s.cptr, unsafe.Pointer(&userdata))
+	return errs[res]
 }
 
-// NOTE: Not implement yet
 //Retrieves the user value that that was set by calling the System.SetUserData function.
-func (s *System) UserData() error {
-	//FMOD_RESULT F_API FMOD_System_GetUserData               (FMOD_SYSTEM *system, void **userdata);
-	return ErrNoImpl
+func (s *System) UserData() (interface{}, error) {
+	var userdata *interface{}
+	cUserdata := unsafe.Pointer(userdata)
+	res := C.FMOD_System_GetUserData(s.cptr, &cUserdata)
+	return *(*interface{})(cUserdata), errs[res]
 }
