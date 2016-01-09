@@ -1,6 +1,6 @@
-prefix=/home/theaidem/work/golang/projects/fmod/src/github.com/theaidem/fmod/fmodstudioapi10704linux/api/lowlevel
-libdir=${prefix}/lib/x86_64
-includedir=${prefix}/inc
+path=${prefix}/fmodstudioapi10704linux/api/lowlevel
+libdir=${path}/lib/x86_64
+includedir=${path}/inc
 
 Name: fmod
 Description: FMOD Studio Low Level API
