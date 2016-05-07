@@ -714,7 +714,8 @@ func (c *Channel) Get3DDistanceFilter() (bool, float64, float64, error) {
 
 // Sets a user value that can be retrieved with "Channel.UserData".
 func (c *Channel) SetUserData(userdata interface{}) error {
-	res := C.FMOD_Channel_SetUserData(c.cptr, unsafe.Pointer(&userdata))
+	data := *(*[]*C.char)(unsafe.Pointer(&userdata))
+	res := C.FMOD_Channel_SetUserData(c.cptr, unsafe.Pointer(&data))
 	return errs[res]
 }
 

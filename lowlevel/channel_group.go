@@ -713,7 +713,8 @@ func (c *ChannelGroup) Get3DDistanceFilter() (bool, float64, float64, error) {
 
 // Sets a user value that can be retrieved with "ChannelGroup.UserData".
 func (c *ChannelGroup) SetUserData(userdata interface{}) error {
-	res := C.FMOD_ChannelGroup_SetUserData(c.cptr, unsafe.Pointer(&userdata))
+	data := *(*[]*C.char)(unsafe.Pointer(&userdata))
+	res := C.FMOD_ChannelGroup_SetUserData(c.cptr, unsafe.Pointer(&data))
 	return errs[res]
 }
 

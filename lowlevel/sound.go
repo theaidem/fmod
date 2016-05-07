@@ -155,7 +155,7 @@ func (s *Sound) Get3DCustomRolloff() (*Vector, int, error) {
 	var points = NewVector()
 	var cpoints *C.FMOD_VECTOR = points.toCp()
 	var numpoints C.int
-	res := C.FMOD_Sound_Get3DCustomRolloff(s.cptr, &cpoints, &numpoints)
+	res := C.FMOD_Sound_Get3DCustomRolloff(s.cptr, unsafe.Pointer(&cpoints), &numpoints)
 	if cpoints != nil {
 		points.fromC(*cpoints)
 	}
@@ -516,7 +516,8 @@ func (s *Sound) MusicSpeed() (float64, error) {
 // It can be useful if an FMOD callback passes an object of this type as a parameter, and the user does not know which object it is
 // (if many of these types of objects exist). Using "Sound.UserData" would help in the identification of the object.
 func (s *Sound) SetUserData(userdata interface{}) error {
-	res := C.FMOD_Sound_SetUserData(s.cptr, unsafe.Pointer(&userdata))
+	data := *(*[]*C.char)(unsafe.Pointer(&userdata))
+	res := C.FMOD_Sound_SetUserData(s.cptr, unsafe.Pointer(&data))
 	return errs[res]
 }
 

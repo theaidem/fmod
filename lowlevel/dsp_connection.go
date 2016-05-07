@@ -92,7 +92,8 @@ func (d *DspConnection) Type() (DSPConnectionType, error) {
 // Sets a user value that the DSPConnection object will store internally. Can be retrieved with "DSPConnection.UserData".
 // This function is primarily used in case the user wishes to 'attach' data to an FMOD object.
 func (d *DspConnection) SetUserData(userdata interface{}) error {
-	res := C.FMOD_DSPConnection_SetUserData(d.cptr, unsafe.Pointer(&userdata))
+	data := *(*[]*C.char)(unsafe.Pointer(&userdata))
+	res := C.FMOD_DSPConnection_SetUserData(d.cptr, unsafe.Pointer(&data))
 	return errs[res]
 }
 

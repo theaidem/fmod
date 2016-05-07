@@ -166,7 +166,8 @@ func (s *SoundGroup) NumPlaying() (int, error) {
 // It can be useful if an FMOD callback passes an object of this type as a parameter, and the user does not know which object it is (if many of these types of objects exist).
 // Using "SoundGroup.UserData" would help in the identification of the object.
 func (s *SoundGroup) SetUserData(userdata interface{}) error {
-	res := C.FMOD_SoundGroup_SetUserData(s.cptr, unsafe.Pointer(&userdata))
+	data := *(*[]*C.char)(unsafe.Pointer(&userdata))
+	res := C.FMOD_SoundGroup_SetUserData(s.cptr, unsafe.Pointer(&data))
 	return errs[res]
 }
 

@@ -104,7 +104,8 @@ func (r *Reverb3D) IsActive() (bool, error) {
 // It can be useful if an FMOD callback passes an object of this type as a parameter,
 // and the user does not know which object it is (if many of these types of objects exist). Using Reverb::getUserData would help in the identification of the object.
 func (r *Reverb3D) SetUserData(userdata interface{}) error {
-	res := C.FMOD_Reverb3D_SetUserData(r.cptr, unsafe.Pointer(&userdata))
+	data := *(*[]*C.char)(unsafe.Pointer(&userdata))
+	res := C.FMOD_Reverb3D_SetUserData(r.cptr, unsafe.Pointer(&data))
 	return errs[res]
 }
 

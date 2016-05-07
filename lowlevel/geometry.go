@@ -144,7 +144,8 @@ func (g *Geometry) Save(data *interface{}, datasize *C.int) error {
 */
 
 func (g *Geometry) SetUserData(userdata interface{}) error {
-	res := C.FMOD_Geometry_SetUserData(g.cptr, unsafe.Pointer(&userdata))
+	data := *(*[]*C.char)(unsafe.Pointer(&userdata))
+	res := C.FMOD_Geometry_SetUserData(g.cptr, unsafe.Pointer(&data))
 	return errs[res]
 }
 

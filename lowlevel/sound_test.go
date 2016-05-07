@@ -399,6 +399,7 @@ func TestSoundUserData(t *testing.T) {
 	}
 
 	userData := "TestData"
+
 	err = censor.SetUserData(userData)
 	if err != nil {
 		t.Fatal(err)

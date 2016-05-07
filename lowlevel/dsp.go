@@ -430,7 +430,8 @@ func (d *DSP) Idle() (bool, error) {
 // It can be useful if an FMOD callback passes an object of this type as a parameter, and the user does not know which object it is (if many of these types of objects exist).
 // Using "DSP.UserData" would help in the identification of the object.
 func (d *DSP) SetUserData(userdata interface{}) error {
-	res := C.FMOD_DSP_SetUserData(d.cptr, unsafe.Pointer(&userdata))
+	data := *(*[]*C.char)(unsafe.Pointer(&userdata))
+	res := C.FMOD_DSP_SetUserData(d.cptr, unsafe.Pointer(&data))
 	return errs[res]
 }
 
