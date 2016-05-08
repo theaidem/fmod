@@ -157,7 +157,7 @@ func (s *Sound) Get3DCustomRolloff() (*Vector, int, error) {
 	var numpoints C.int
 	res := C.FMOD_Sound_Get3DCustomRolloff(s.cptr, cpoints, &numpoints)
 	if cpoints != nil {
-		//points.fromC(*cpoints)
+		points.fromC(**cpoints)
 	}
 	return &points, int(numpoints), errs[res]
 }
