@@ -44,19 +44,19 @@ type ReverbProperties struct {
 	WetLevel float64
 }
 
-func NewReverbProperties() ReverbProperties {
-	return ReverbProperties{
+func NewReverbProperties() *ReverbProperties {
+	return &ReverbProperties{
 		DecayTime:         0,
 		EarlyDelay:        0,
-		LateDelay:         0,
-		HFReference:       20,
-		HFDecayRatio:      10,
-		Diffusion:         0,
-		Density:           0,
-		LowShelfFrequency: 20,
-		LowShelfGain:      -36,
+		LateDelay:         11,
+		HFReference:       5000,
+		HFDecayRatio:      100,
+		Diffusion:         100,
+		Density:           100,
+		LowShelfFrequency: 250,
+		LowShelfGain:      0,
 		HighCut:           20,
-		EarlyLateMix:      0,
+		EarlyLateMix:      96,
 		WetLevel:          -80,
 	}
 }

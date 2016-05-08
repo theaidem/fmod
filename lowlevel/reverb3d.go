@@ -73,7 +73,7 @@ func (r *Reverb3D) SetProperties(properties ReverbProperties) error {
 }
 
 // Retrieves the current reverb environment.
-func (r *Reverb3D) Properties() (ReverbProperties, error) {
+func (r *Reverb3D) Properties() (*ReverbProperties, error) {
 	var cproperties C.FMOD_REVERB_PROPERTIES
 	properties := NewReverbProperties()
 	res := C.FMOD_Reverb3D_GetProperties(r.cptr, &cproperties)

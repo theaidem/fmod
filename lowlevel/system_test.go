@@ -424,6 +424,30 @@ func TestSystemUserData(t *testing.T) {
 	<-done
 }
 
+func TestSystemGlobalReverbProperties(t *testing.T) {
+
+	system, done, err := NewSystem(0)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	propsIn := NewReverbProperties()
+	err = system.SetReverbProperties(propsIn)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	propsOut, err := system.ReverbProperties()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	t.Logf("%#v\n", propsIn.DecayTime)
+	t.Logf("%#v\n", propsOut.DecayTime)
+
+	<-done
+}
+
 /*
 func TestSystemAdvancedSettings(t *testing.T) {
 	system, done, err := NewSystem(0)

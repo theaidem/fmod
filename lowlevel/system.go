@@ -909,21 +909,24 @@ func (s *System) DetachChannelGroupFromPort(channelgroup *C.FMOD_CHANNELGROUP) e
    Reverb API.
 */
 
-// NOTE: Not implement yet
 // Sets parameters for the global reverb environment.
 // Reverb parameters can be set manually, or automatically using the pre-defined presets given in the fmod.h header.
-func (s *System) SetReverbProperties(instance C.int, prop *C.FMOD_REVERB_PROPERTIES) error {
-	//FMOD_RESULT F_API FMOD_System_SetReverbProperties       (FMOD_SYSTEM *system, int instance, const FMOD_REVERB_PROPERTIES *prop);
-	return ErrNoImpl
+func (s *System) SetReverbProperties(props *ReverbProperties) error {
+	rp := props.toC()
+	res := C.FMOD_System_SetReverbProperties(s.cptr, C.int(1), *(**C.FMOD_REVERB_PROPERTIES)(unsafe.Pointer(&rp)))
+	return errs[res]
 }
 
-// NOTE: Not implement yet
 // Retrieves the current reverb environment for the specified reverb instance.
 // You must specify the 'Instance' value (usually 0 unless you are using multiple reverbs) before calling this function.
 // Note! It is important to specify the 'Instance' value in the REVERB_PROPERTIES structure correctly, otherwise you will get an FMOD_ERR_REVERB_INSTANCE error.
-func (s *System) ReverbProperties(instance C.int, prop *C.FMOD_REVERB_PROPERTIES) error {
-	//FMOD_RESULT F_API FMOD_System_GetReverbProperties       (FMOD_SYSTEM *system, int instance, FMOD_REVERB_PROPERTIES *prop);
-	return ErrNoImpl
+func (s *System) ReverbProperties() (*ReverbProperties, error) {
+	props := new(ReverbProperties)
+	cReverbProperties := *(*C.FMOD_REVERB_PROPERTIES)(unsafe.Pointer(props))
+	res := C.FMOD_System_GetReverbProperties(s.cptr, C.int(1), &cReverbProperties)
+	props.fromC(cReverbProperties)
+	return props, errs[res]
+
 }
 
 /*
