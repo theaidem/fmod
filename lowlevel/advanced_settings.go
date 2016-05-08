@@ -207,7 +207,7 @@ func (a *AdvancedSettings) fromC(as C.FMOD_ADVANCEDSETTINGS) {
 	a.RandomSeed = uint32(as.randomSeed)
 }
 
-func (a *AdvancedSettings) toC() C.FMOD_ADVANCEDSETTINGS {
+func (a *AdvancedSettings) toC() *C.FMOD_ADVANCEDSETTINGS {
 	var as C.FMOD_ADVANCEDSETTINGS
 	as.cbSize = C.int(a.CbSize)
 	as.maxMPEGCodecs = C.int(a.MaxMPEGCodecs)
@@ -244,5 +244,5 @@ func (a *AdvancedSettings) toC() C.FMOD_ADVANCEDSETTINGS {
 	as.commandQueueSize = C.uint(a.CommandQueueSize)
 	as.randomSeed = C.uint(a.RandomSeed)
 
-	return as
+	return *(**C.FMOD_ADVANCEDSETTINGS)(unsafe.Pointer(&as))
 }

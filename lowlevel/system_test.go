@@ -424,6 +424,7 @@ func TestSystemUserData(t *testing.T) {
 	<-done
 }
 
+/*
 func TestSystemAdvancedSettings(t *testing.T) {
 	system, done, err := NewSystem(0)
 	if err != nil {
@@ -456,3 +457,4 @@ func TestSystemAdvancedSettings(t *testing.T) {
 
 	<-done
 }
+*/

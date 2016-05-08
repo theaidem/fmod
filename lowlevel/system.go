@@ -203,13 +203,17 @@ func (s *System) AttachFileSystem(useropen C.FMOD_FILE_OPEN_CALLBACK, userclose 
 
 // Sets advanced features like configuring memory and cpu usage for FMOD_CREATECOMPRESSEDSAMPLE usage.
 func (s *System) SetAdvancedSettings(settings *AdvancedSettings) error {
-	var csettings = settings.toC()
-	res := C.FMOD_System_SetAdvancedSettings(s.cptr, &csettings)
+	return ErrNoImpl
+
+	var csettings *C.FMOD_ADVANCEDSETTINGS = settings.toC()
+	res := C.FMOD_System_SetAdvancedSettings(s.cptr, csettings)
 	return errs[res]
 }
 
 // Retrieves the advanced settings value set for the system object.
 func (s *System) AdvancedSettings() (*AdvancedSettings, error) {
+	return nil, ErrNoImpl
+
 	var settings C.FMOD_ADVANCEDSETTINGS
 	settings.cbSize = C.int(unsafe.Sizeof(settings))
 	res := C.FMOD_System_GetAdvancedSettings(s.cptr, &settings)

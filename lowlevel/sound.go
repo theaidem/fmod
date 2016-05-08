@@ -153,11 +153,11 @@ func (s *Sound) Set3DCustomRolloff(points *Vector, numpoints int) error {
 // Retrieves a pointer to the sound's current custom rolloff curve.
 func (s *Sound) Get3DCustomRolloff() (*Vector, int, error) {
 	var points = NewVector()
-	var cpoints *C.FMOD_VECTOR = points.toCp()
+	var cpoints **C.FMOD_VECTOR = points.toCp()
 	var numpoints C.int
-	res := C.FMOD_Sound_Get3DCustomRolloff(s.cptr, unsafe.Pointer(&cpoints), &numpoints)
+	res := C.FMOD_Sound_Get3DCustomRolloff(s.cptr, cpoints, &numpoints)
 	if cpoints != nil {
-		points.fromC(*cpoints)
+		//points.fromC(*cpoints)
 	}
 	return &points, int(numpoints), errs[res]
 }
